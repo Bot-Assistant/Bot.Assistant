@@ -1,0 +1,8 @@
+
+*.pyc
+*.log
+Bot.Assistant/settings/settingDatabase.py
+Bot.Assistant/settings/settingToken.py
+BotAssistant/addons/.DS_Store
+BotAssistant/settings/settingDatabase.py
+BotAssistant/settings/settingToken.py

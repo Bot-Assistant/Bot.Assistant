@@ -1,0 +1,2 @@
+cogEnabled = True
+cogFile = "cogReactionRole"

@@ -1,0 +1,9 @@
+red = 0xB91717
+orange = 0xE69312
+yellow = 0xE6C312
+cyan = 0x12E6E6
+white = 0xffffff
+green = 0x17B93F
+black = 0x000000
+
+discordEmbed = 0x2f3136
