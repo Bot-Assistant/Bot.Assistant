@@ -1,5 +1,6 @@
 # █▀█ █▄░█   █▀▄▀█ █▀▀ █▀▄▀█ █▄▄ █▀▀ █▀█   ░░█ █▀█ █ █▄░█
 # █▄█ █░▀█   █░▀░█ ██▄ █░▀░█ █▄█ ██▄ █▀▄   █▄█ █▄█ █ █░▀█
+
 import addons.configuration.functions.commands.commandLogs as funcLogs
 import addons.configuration.functions.commands.commandLogsLevel as funcLogsLevel
 
@@ -19,7 +20,7 @@ class Configuration(commands.Cog):
         self.bot = bot
 
 
-    #t LOGS
+    # LOGS
     @groupConfiguration.command(name="log", description="Allows you to define the bot's log channel.")
     async def commandLogs(
         ctx, 
@@ -28,7 +29,7 @@ class Configuration(commands.Cog):
         await funcLogs.logs(ctx, channel)
 
 
-    #t LOGS_LEVEL
+    # LOGS_LEVEL
     @groupConfiguration.command(name="logs_level", description="Change the log level.")
     async def commandLanguage(
         ctx, 

@@ -1,6 +1,6 @@
 # IMPORT LIBRARIES
 import os
-from sys import exit
+import sys
 
 # IMPORT SERVICES
 from services.serviceLogger import consoleLogger as Logger
@@ -28,7 +28,7 @@ def databaseFileInit():
     file.close()
     Logger.system("[CONFIG]Database config file created")
     Logger.install("[CONFIG]Please fill the database config file")
-    exit(0)
+    sys.exit(0)
 
 # Fonction d'initialisation du fichier settingsToken.py
 def tokenFileInit():    
@@ -37,7 +37,7 @@ def tokenFileInit():
     file.close()
     Logger.system("[CONFIG]Token config file created")
     Logger.install("[CONFIG]Please fill the token config file")
-    exit(0)
+    sys.exit(0)
     
 
 # VERIFICATION DES FICHIERS DE CONFIGURATION

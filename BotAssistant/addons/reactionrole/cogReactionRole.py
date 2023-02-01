@@ -1,12 +1,13 @@
 # █▀█ █▀▀ ▄▀█ █▀▀ ▀█▀ █ █▀█ █▄░█   █▀█ █▀█ █░░ █▀▀
 # █▀▄ ██▄ █▀█ █▄▄ ░█░ █ █▄█ █░▀█   █▀▄ █▄█ █▄▄ ██▄
-from addons.reactionrole.functions.commands.commandCreate import create
-from addons.reactionrole.functions.commands.commandDelete import delete
-from addons.reactionrole.functions.commands.commandList import list
-from addons.reactionrole.functions.events.eventOnRawReactionAdd import OnRawReactionAdd
-from addons.reactionrole.functions.events.eventOnRawReactionRemove import OnRawReactionRemove
+import addons.reactionrole.functions.commands.commandCreate as commandCreate
+import addons.reactionrole.functions.commands.commandDelete as commandDelete
+import addons.reactionrole.functions.commands.commandList as commandList
+import addons.reactionrole.functions.events.eventOnRawReactionAdd as eventOnRawReactionAdd
+import addons.reactionrole.functions.events.eventOnRawReactionRemove as eventOnRawReactionRemove
 
 import addons.reactionrole.handlers.handlerDatabaseInit as handlerDatabaseInit
+
 from services.serviceLogger import consoleLogger as Logger
 from settings.settingBot import debug
 
@@ -30,11 +31,11 @@ class ReactionRole(serviceBot.classBot.getCommands().Cog):
     
     @serviceBot.classBot.getCommands().Cog.listener()
     async def on_raw_reaction_add(self, payload):
-        await OnRawReactionAdd(payload)
+        await eventOnRawReactionAdd.OnRawReactionAdd(payload)
         
     @serviceBot.classBot.getCommands().Cog.listener()
     async def on_raw_reaction_remove(self, payload):
-        await OnRawReactionRemove(payload)
+        await eventOnRawReactionRemove.OnRawReactionRemove(payload)
     
     
     #t CREATE
@@ -48,7 +49,7 @@ class ReactionRole(serviceBot.classBot.getCommands().Cog):
         emote: discord.Option(str, required=True),
         reactiontype: discord.Option(str, choices=["Ajoute le role","Supprime le role","Ajoute/Supprime le role"], required=True)
     ):
-        await create(ctx, channel_id.id, message_id, role, emote, reactiontype)
+        await commandCreate.create(ctx, channel_id.id, message_id, role, emote, reactiontype)
         
         
     #t DELETE
@@ -57,7 +58,7 @@ class ReactionRole(serviceBot.classBot.getCommands().Cog):
         ctx,
         id: discord.Option(int, required=True)
     ):
-        await delete(ctx, id)
+        await commandDelete.delete(ctx, id)
         
         
     #t LIST
@@ -66,7 +67,7 @@ class ReactionRole(serviceBot.classBot.getCommands().Cog):
         ctx,
         page: discord.Option(int, required=False)
     ):
-        await list(ctx, page)
+        await commandList.list(ctx, page)
     
 
 

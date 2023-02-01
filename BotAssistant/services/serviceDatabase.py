@@ -1,7 +1,8 @@
-from sys import exit
+import sys
 
 import mysql.connector
 import settings.settingDatabase as settingDatabase
+
 from services.serviceLogger import consoleLogger as Logger
 from settings.settingBot import debug
 
@@ -32,7 +33,7 @@ def bddInit():
                    
     except Exception as error:
         Logger.critical("[HANDLER][INIT]Database connection error -> " + str(error))
-        exit(0)
+        sys.exit(0)
 
 # Make a request to the database without returning a result
 def makeRequest(requestFormat, requestSettings):

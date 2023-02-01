@@ -1,6 +1,6 @@
 import services.serviceDatabase as serviceDatabase      
-from services.serviceLogger import consoleLogger as Logger
 
+from services.serviceLogger import consoleLogger as Logger
 from settings.settingBot import debug
 
 # Permet de créer un rôle de réaction dans la base de données
@@ -12,7 +12,7 @@ def createReactionRole(server_ID, channel_ID, message_ID, role_ID, emote, reacti
                     """
     requestSettings = (server_ID, channel_ID, message_ID, role_ID, emote, reactionType)
     try:
-        if debug == True:
+        if debug:
             Logger.debug("[HANDLER][REACTIONROLE] Reaction role create " + str(server_ID) + " " + str(message_ID) + " " + str(role_ID) + " " + str(emote) + " " + str(reactionType))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
@@ -30,7 +30,7 @@ def deleteReactionRole(server_ID, ID):
                     """
     requestSettings = (server_ID, ID)
     try:
-        if debug == True:
+        if debug:
             Logger.debug("[HANDLER][REACTIONROLE] Deleting reaction role from the DB " + str(ID))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
@@ -50,7 +50,7 @@ def getReactionRole(server_ID):
     try:
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
         
-        if debug == True:
+        if debug:
             Logger.debug("[HANDLER][REACTIONROLE] Retrieving the list of reaction roles -> " + str(server_ID))
             
         return result

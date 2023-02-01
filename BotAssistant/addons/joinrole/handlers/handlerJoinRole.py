@@ -11,7 +11,7 @@ def addRole(serverID, role_ID):
                     """
     requestSettings = (serverID, role_ID,)
     try:
-        if debug == True:
+        if debug:
             Logger.debug("[HANDLER][JOINROLE][ADD] Adding a role to the DB " + str(serverID) + " " + str(role_ID))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
@@ -28,7 +28,7 @@ def deleteRole(role_ID):
                     """
     requestSettings = (role_ID,)
     try:
-        if debug == True:
+        if debug:
             Logger.debug("[HANDLER][JOINROLE][DELETE] Deleting a role from the DB " + str(role_ID))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
@@ -47,7 +47,7 @@ def listRole(server_ID):
     try:
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
 
-        if debug == True:
+        if debug:
             Logger.debug("[HANDLER][JOINROLE][LIST] Retrieving the list of join roles -> " + str(result))
             
         return result

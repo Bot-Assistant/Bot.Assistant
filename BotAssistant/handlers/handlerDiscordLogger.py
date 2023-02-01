@@ -1,6 +1,6 @@
 import services.serviceDatabase as serviceDatabase 
-from services.serviceLogger import consoleLogger as Logger
 
+from services.serviceLogger import consoleLogger as Logger
 from settings.settingBot import debug
 
     
@@ -15,7 +15,7 @@ def getLogsID(server_ID):
     try:
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
         
-        if debug == True: 
+        if debug: 
             Logger.debug("[HANDLER][LOGGER][GETCHANNEL] Log ID recovery -> " + str(result[0][0]))
             
         return result[0][0]
@@ -35,7 +35,7 @@ def getLogsLevel(server_ID):
     try:
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
         
-        if debug == True: 
+        if debug: 
             Logger.debug("[HANDLER][LOGGER][GETLEVEL] Log level recovery -> "+ str(result[0][0]))
             
         return result[0][0]

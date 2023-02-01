@@ -6,6 +6,7 @@ import addons.joinrole.functions.commands.commandList as funcList
 import addons.joinrole.functions.events.eventOnMemberJoin as funcEventOnMemberJoin
 
 import addons.joinrole.handlers.handlerDatabaseInit as handlerDatabaseInit
+
 from services.serviceLogger import consoleLogger as Logger
 from settings.settingBot import debug
 
@@ -28,7 +29,7 @@ class JoinRole(commands.Cog):
         await funcEventOnMemberJoin.onMemberJoin(member)
     
     
-    #t ADD
+    # Command: ADD
     @groupJoinRole.command(name="add", description="Command to define the roles when users arrive.")
     async def commandLogs(
         ctx: discord.ApplicationContext, 
@@ -40,7 +41,7 @@ class JoinRole(commands.Cog):
         await funcAdd.add(ctx, role)
 
 
-    #t DELETE
+    # Command: DELETE
     @groupJoinRole.command(name="delete", description="Command to remove a role from the newcomers list.")
     async def commandLogs(
         ctx: discord.ApplicationContext,
@@ -52,7 +53,7 @@ class JoinRole(commands.Cog):
         await funcDelete.delete(ctx, role)
 
 
-    #t LIST
+    # Command: LIST
     @groupJoinRole.command(name="list", description="Command to remove a role from the newcomers list.")
     async def commandLogs(
         ctx: discord.ApplicationContext

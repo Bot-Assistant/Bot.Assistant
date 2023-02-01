@@ -1,6 +1,6 @@
 import services.serviceDatabase as serviceDatabase 
-from services.serviceLogger import consoleLogger as Logger
 
+from services.serviceLogger import consoleLogger as Logger
 from settings.settingBot import debug
 
 # Add a server to the database when the bot join a server
@@ -15,7 +15,7 @@ def addServerID(serverID):
     try:
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
-        if debug == True: 
+        if debug: 
             Logger.debug("[HANDLER][CONFIGURATION] Adding a server to the DB " + str(serverID))        
         
     except Exception as error:
@@ -34,7 +34,7 @@ def delServerID(serverID):
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
         
-        if debug == True: 
+        if debug: 
             Logger.debug("[HANDLER][CONFIGURATION] Deleting a server from the DB " + str(serverID))
             
     except Exception as error:
