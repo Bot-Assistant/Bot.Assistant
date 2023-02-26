@@ -24,6 +24,8 @@ def importCogs():
                         initFile = os.path.join(root, file).replace("\\", ".")[:-3]
                     elif os.name == 'posix':
                         initFile = os.path.join(root, file).replace("/", ".")[:-3]
+                    else:
+                        Logger.system("OS: Unknown")
 
                     importedFile = importlib.import_module(initFile)
 
@@ -34,6 +36,8 @@ def importCogs():
                         cogPath = root.replace("\\", ".") + "." + importedFile.cogFile
                     elif os.name == 'posix':
                         cogPath = root.replace("/", ".") + "." + importedFile.cogFile
+                    else:
+                        Logger.system("OS: Unknown")
                     
                     bot.load_extension(cogPath)
                     

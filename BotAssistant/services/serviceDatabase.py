@@ -1,39 +1,46 @@
-import sys
-
 import mysql.connector
 import settings.settingDatabase as settingDatabase
-
 from services.serviceLogger import consoleLogger as Logger
-from settings.settingBot import debug
+import sys
+import settings.settingBot as settingBot
 
 
 # Create the database if it does not exist
-def bddInit():
+def databaseCreation(tableName: str, columns: list):
+    # Create database
     try:
-        Logger.database("[CONNECTION]Database connection success")
-        
-        with mysql.connector.connect(**settingDatabase.connection) as database :
-            with database.cursor() as cursor:
-                try:
-                    cursor.execute(
-                        "CREATE TABLE IF NOT EXISTS `servers` (\
-                        `ID` int(11) NOT NULL AUTO_INCREMENT,\
-                        `server_ID` bigint(20) NOT NULL,\
-                        `logs_ID` bigint(20) DEFAULT NULL,\
-                        `logs_level` int(11) DEFAULT 1,\
-                        PRIMARY KEY (`ID`)\
-                        ) ENGINE=InnoDB CHARSET=utf8mb4;"
-                    )
-                    Logger.database("[HANDLER][INIT]Server table init")
-                except Exception as error:
-                    Logger.error("[TABLE]Table error servers -> " + str(error))
-                    
-                database.commit()
-            
-                   
+        Logger.database(f"[CONNECTION][{tableName}][INIT]Database connection success")
+
+        # Create Table
+        requestFormat = f"""
+                CREATE TABLE IF NOT EXISTS {tableName} (
+                    ID INT NOT NULL AUTO_INCREMENT,
+                    PRIMARY KEY (ID)
+                    );
+                """
+        requestSettings = ()
+
+        makeRequest(requestFormat, requestSettings)
+
+        # Add columns
+        for column in columns:
+            requestFormat = f"""
+                    ALTER TABLE {tableName}
+                    ADD COLUMN IF NOT EXISTS """ + column[0] + """ """ + column[1] + """;
+                    """
+            requestSettings = ()
+
+            makeRequest(requestFormat, requestSettings)
+
+            if settingBot.debug:
+                Logger.debug(f"[HANDLER][{tableName}][INIT]Column {column[0]} initialization success")
+
+        Logger.database(f"[HANDLER][{tableName}][INIT]Table {tableName} initialization success")
+           
     except Exception as error:
-        Logger.critical("[HANDLER][INIT]Database connection error -> " + str(error))
+        Logger.critical(f"[HANDLER][{tableName}][INIT]Table {tableName} initialization error -> " + str(error))
         sys.exit(0)
+
 
 # Make a request to the database without returning a result
 def makeRequest(requestFormat, requestSettings):

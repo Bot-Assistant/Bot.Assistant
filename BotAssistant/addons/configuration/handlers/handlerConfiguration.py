@@ -1,20 +1,20 @@
 import services.serviceDatabase as serviceDatabase 
-
 from services.serviceLogger import consoleLogger
+
 from settings.settingBot import debug
 
 
-def setLogsID(server_ID, logs_ID):
+# Permet de définir le salon de logs
+def setLogsID(serverID, logsID):
     requestFormat = """
                     UPDATE servers 
-                    SET logs_ID = %s
-                    WHERE server_ID = %s
+                    SET logsID = %s
+                    WHERE serverID = %s
                     """
-    requestSettings = (logs_ID, server_ID,)
-
+    requestSettings = (logsID, serverID,)
     try:
-        if debug: 
-            consoleLogger.debug("[HANDLER][CONFIGURATION] Adding a log ID to the database. SRV:" + str(server_ID) + " LOGS:" + str(logs_ID))
+        if debug == True: 
+            consoleLogger.debug("[HANDLER][CONFIGURATION] Adding a log ID to the database. SRV:" + str(serverID) + " LOGS:" + str(logsID))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
@@ -22,17 +22,17 @@ def setLogsID(server_ID, logs_ID):
         consoleLogger.error("[HANDLER][CONFIGURATION] DB error setLogsID -> " + str(error))
         
 
-def setLogsLevel(server_ID, logs_level):
+# Permet de définir le niveau de logs
+def setLogsLevel(serverID, logsLevel):
     requestFormat = """
                     UPDATE servers 
-                    SET logs_level = %s
-                    WHERE server_ID = %s
+                    SET logsLevel = %s
+                    WHERE serverID = %s
                     """
-    requestSettings = (logs_level, server_ID,)
-    
+    requestSettings = (logsLevel, serverID,)
     try:
-        if debug: 
-            consoleLogger.debug("[HANDLER][CONFIGURATION] Definition of the log level in the DB. SRV:" + str(server_ID) + " LOG LEVEL:" + str(logs_level))
+        if debug == True: 
+            consoleLogger.debug("[HANDLER][CONFIGURATION] Definition of the log level in the DB. SRV:" + str(serverID) + " LOG LEVEL:" + str(logsLevel))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         

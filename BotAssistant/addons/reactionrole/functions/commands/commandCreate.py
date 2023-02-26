@@ -2,39 +2,34 @@ import addons.reactionrole.handlers.handlerReactionRole as handlerReactionRole
 import services.serviceBot as serviceBot
 import services.serviceDiscordLogger as serviceDiscordLogger
 
-from services.serviceLogger import consoleLogger as Logger
-
 async def create(ctx, channel_id, message_id, role, emote, reactionType):
-
-    # Permission check
     if ctx.author.guild_permissions.manage_roles:
         
         channel = None
         message = None
         
-        # Create of the waiting embed
         embed = serviceBot.classBot.getDiscord().Embed(title="Reaction Role", description="New reaction role added \n This may take some time.", color=0x00ff00)
         embedSend = await ctx.respond(embed=embed)
         
-        # Channel verification
+        #Verification du channel
         try:
             channel = serviceBot.classBot.getBot().get_channel(int(channel_id))
         except Exception as error:
-            Logger.error("[Module][OnRawReactionAdd] Get channel error ->" + error)
+            print("[Module][OnRawReactionAdd] Get channel error ->" + error)
         
-        # Message verification
+        #Si le channel est trouvé
         if channel != None:
+            #Verification du message
             try:
                 message = await channel.fetch_message(int(message_id))
             except Exception as error:
                 message = None
-                Logger.error("[Module][OnRawReactionAdd] Get message error -> " + str(error))
+                print("[Module][OnRawReactionAdd] Get message error -> " + str(error))
             
 
-        # If the channel and the message are found
+        #Field du message
         if channel != None and message != None:
-            
-            # Add the role in the database
+            #Message Commande
             embed = serviceBot.classBot.getDiscord().Embed(title="Reaction Role", description="New reaction role added ", color=0x00ff00)
             embed.add_field(name="Guild ID", value=str(ctx.guild.id) + " -> " + ctx.guild.name, inline=False)
             embed.add_field(name="Channel ID", value=str(channel_id) + " -> " + channel.name, inline=False)
@@ -52,25 +47,24 @@ async def create(ctx, channel_id, message_id, role, emote, reactionType):
                 case "Supprime le role": 
                     reactionType = 0
             
-            # Add the reaction to the message
+            #Add reaction
             try:
                 await message.add_reaction(emote)
             except Exception as error:
-                Logger.error("[Module][OnRawReactionAdd] Add reaction error -> " + str(error))
+                print("[Module][OnRawReactionAdd] Add reaction error -> " + str(error))
                 
+                #Message Commande
                 embed = serviceBot.classBot.getDiscord().Embed(title="Reaction Role", description="Emote not found on this server.", color=0xCD2B2B)
                 await ctx.respond(embed=embed)
                 
                 return
             
-            # Add the role in the database
+            #Ajout BDD
             handlerReactionRole.createReactionRole(ctx.guild.id, channel_id, message_id, role.id, emote, reactionType)
             
-            # Send a message to the logs
+            #Logs
             await serviceDiscordLogger.discordLogger.warn("A new reaction role has been created by " + ctx.author.name + " -> " + role.name, ctx.guild.id)
-
         else:
-
-            # Send a message to the user
+            #Message Commande
             embed = serviceBot.classBot.getDiscord().Embed(title="Reaction Role", description="The channel or message ID was not found on this server.", color=0xCD2B2B)
             await ctx.respond(embed=embed)

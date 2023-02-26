@@ -1,5 +1,4 @@
 import addons.reactionrole.handlers.handlerReactionRole as handlerReactionRole
-
 import services.serviceBot as serviceBot
 import services.serviceDiscordLogger as serviceDiscordLogger
 
@@ -19,7 +18,7 @@ async def delete(ctx, ID):
         await ctx.respond(embed=embed)
         
         #Logs
-        await serviceDiscordLogger.discordLogger.warn("A reaction role has been removed by " + ctx.author.name + " -> " + ID, ctx.guild.id)
+        await serviceDiscordLogger.discordLogger.warn("A reaction role has been removed by " + ctx.author.name + " -> " + str(ID), str(ctx.guild.id))
     else:
         #Message Commande
         embed = serviceBot.classBot.getDiscord().Embed(title="Reaction Role", description="You do not have permission to execute this command.", color=0xCD2B2B)

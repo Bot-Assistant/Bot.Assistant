@@ -1,6 +1,6 @@
 
 *.pyc
 *.log
-BotAssistant/addons/.DS_Store
 BotAssistant/settings/settingDatabase.py
 BotAssistant/settings/settingToken.py
+BotAssistant/addons/soundplay/sound/*

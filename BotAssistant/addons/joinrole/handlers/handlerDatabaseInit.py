@@ -1,20 +1,12 @@
-from services.serviceDatabase import makeRequest
-from services.serviceLogger import consoleLogger as Logger
-from settings.settingBot import debug
+import services.serviceDatabase as serviceDatabase
 
+# Create the database if it does not exist
 def databaseInit():
-    requestFormat = """
-                    CREATE TABLE IF NOT EXISTS onMemberJoin
-                    (
-                        server_ID BIGINT NOT NULL,
-                        role_ID BIGINT NOT NULL
-                    ) ENGINE=InnoDB CHARSET=utf8mb4;
-                    """
-    requestSettings = ()
+    # Table structure
+    tableName = "addon_joinrole_roles"
+    columns = [
+        ["serverID", "BIGINT NOT NULL"], 
+        ["roleID", "BIGINT NOT NULL"]
+    ]
+    serviceDatabase.databaseCreation(tableName, columns)
 
-    try:
-        Logger.database("[HANDLER][JOINROLE][INIT]Join role table init")
-        makeRequest(requestFormat, requestSettings)
-    
-    except Exception as error:
-        Logger.error("[HANDLER][JOINROLE][INIT]DB error databaseInit -> " + str(error))

@@ -3,16 +3,16 @@ from services.serviceLogger import consoleLogger as Logger
 
 from settings.settingBot import debug
 
-def addRole(serverID, role_ID):
+def addRole(serverID, roleID):
     requestFormat = """
-                    INSERT INTO onMemberJoin
-                    (server_ID, role_ID)
+                    INSERT INTO addon_joinrole_roles
+                    (serverID, roleID)
                     VALUES (%s, %s)
                     """
-    requestSettings = (serverID, role_ID,)
+    requestSettings = (serverID, roleID,)
     try:
-        if debug:
-            Logger.debug("[HANDLER][JOINROLE][ADD] Adding a role to the DB " + str(serverID) + " " + str(role_ID))
+        if debug == True:
+            Logger.debug("[HANDLER][JOINROLE][ADD] Adding a role to the DB " + str(serverID) + " " + str(roleID))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
@@ -20,16 +20,15 @@ def addRole(serverID, role_ID):
         Logger.error("[HANDLER][JOINROLE][ADD] DB error addRole -> " + str(error))
         
 
-def deleteRole(role_ID):
+def deleteRole(serverID, roleID):
     requestFormat = """
-                    DELETE 
-                    FROM onMemberJoin
-                    WHERE role_ID = %s
+                    DELETE FROM addon_joinrole_roles
+                    WHERE serverID = %s AND roleID = %s;
                     """
-    requestSettings = (role_ID,)
+    requestSettings = (serverID, roleID,)
     try:
-        if debug:
-            Logger.debug("[HANDLER][JOINROLE][DELETE] Deleting a role from the DB " + str(role_ID))
+        if debug == True:
+            Logger.debug("[HANDLER][JOINROLE][DELETE] Deleting a role from the DB " + str(roleID))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
@@ -37,20 +36,20 @@ def deleteRole(role_ID):
         Logger.error("[HANDLER][JOINROLE][DELETE] DB error deleteRole -> " + str(error))
         
         
-def listRole(server_ID):
+def listRole(serverID):
     requestFormat = """
-                    SELECT role_ID
-                    FROM onMemberJoin
-                    WHERE server_ID = %s;
+                    SELECT roleID
+                    FROM addon_joinrole_roles
+                    WHERE serverID = %s;
                     """
-    requestSettings = (server_ID,)
+    requestSettings = (serverID,)
     try:
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
 
-        if debug:
+        if debug == True:
             Logger.debug("[HANDLER][JOINROLE][LIST] Retrieving the list of join roles -> " + str(result))
             
         return result
     
     except Exception as error:
-        Logger.error("[HANDLER][JOINROLE][LIST] DB error getJoinRole -> " + str(error))
+        Logger.error("[HANDLER][JOINROLE][LIST] DB error listRole -> " + str(error))

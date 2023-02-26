@@ -1,6 +1,6 @@
 import services.serviceDatabase as serviceDatabase 
-
 from services.serviceLogger import consoleLogger as Logger
+
 from settings.settingBot import debug
 
 # Add a server to the database when the bot join a server
@@ -15,11 +15,11 @@ def addServerID(serverID):
     try:
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
-        if debug: 
-            Logger.debug("[HANDLER][CONFIGURATION] Adding a server to the DB " + str(serverID))        
+        if debug == True: 
+            Logger.debug("[HANDLER][BOTASSISTANT] Adding a server to the DB " + str(serverID))        
         
     except Exception as error:
-        Logger.error("[HANDLER][CONFIGURATION] DB error addServerID -> " + str(error))
+        Logger.error("[HANDLER][BOTASSISTANT] DB error addServerID -> " + str(error))
         
         
 # Delete a server from the database when the bot leave a server
@@ -34,8 +34,25 @@ def delServerID(serverID):
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
         
-        if debug: 
-            Logger.debug("[HANDLER][CONFIGURATION] Deleting a server from the DB " + str(serverID))
+        if debug == True: 
+            Logger.debug("[HANDLER][BOTASSISTANT] Deleting a server from the DB " + str(serverID))
             
     except Exception as error:
-        Logger.error("[HANDLER][CONFIGURATION] DB error delServerID -> " + str(error))
+        Logger.error("[HANDLER][BOTASSISTANT] DB error delServerID -> " + str(error))
+
+# Get servers from the database
+def getServers():
+    requestFormat = """
+                    SELECT serverID
+                    FROM servers
+                    """
+    try:
+        result = serviceDatabase.getInfoRequest(requestFormat, None)
+        
+        if debug == True: 
+            Logger.debug("[HANDLER][BOTASSISTANT] Get servers from the DB " + str(result))
+            
+        return result
+        
+    except Exception as error:
+        Logger.error("[HANDLER][BOTASSISTANT] DB error getServers -> " + str(error))

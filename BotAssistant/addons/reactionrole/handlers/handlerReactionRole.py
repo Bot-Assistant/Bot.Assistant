@@ -1,59 +1,59 @@
 import services.serviceDatabase as serviceDatabase      
-
 from services.serviceLogger import consoleLogger as Logger
+
 from settings.settingBot import debug
 
 # Permet de créer un rôle de réaction dans la base de données
-def createReactionRole(server_ID, channel_ID, message_ID, role_ID, emote, reactionType):
+def createReactionRole(serverID, channelID, messageID, roleID, emote, reactionType):
     requestFormat = """
-                    INSERT INTO onRawReactionAdd
-                    (server_ID, channel_ID, message_ID, role_ID, emote, reaction_type)
+                    INSERT INTO addon_reactionrole_reactions
+                    (serverID, channelID, messageID, roleID, emote, reactionType)
                     VALUES (%s, %s, %s, %s, %s, %s)
                     """
-    requestSettings = (server_ID, channel_ID, message_ID, role_ID, emote, reactionType)
+    requestSettings = (serverID, channelID, messageID, roleID, emote, reactionType)
     try:
-        if debug:
-            Logger.debug("[HANDLER][REACTIONROLE] Reaction role create " + str(server_ID) + " " + str(message_ID) + " " + str(role_ID) + " " + str(emote) + " " + str(reactionType))
+        if debug == True:
+            Logger.debug("[HANDLER][REACTIONROLE] Reaction role create " + str(serverID) + " " + str(messageID) + " " + str(roleID) + " " + str(emote) + " " + str(reactionType))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
     except Exception as error:
-        Logger.error("[HANDLER][REACTIONROLE] DB error createReactionRole -> " + error)
+        Logger.error("[HANDLER][REACTIONROLE] DB error createReactionRole -> " + str(error))
             
 
 #Permet de supprimer un rôle de réaction dans la base de données
-def deleteReactionRole(server_ID, ID):
+def deleteReactionRole(serverID, ID):
     requestFormat = """
                     DELETE 
-                    FROM onRawReactionAdd
-                    WHERE server_ID = %s AND ID = %s
+                    FROM addon_reactionrole_reactions
+                    WHERE serverID = %s AND ID = %s
                     """
-    requestSettings = (server_ID, ID)
+    requestSettings = (serverID, ID)
     try:
-        if debug:
+        if debug == True:
             Logger.debug("[HANDLER][REACTIONROLE] Deleting reaction role from the DB " + str(ID))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
     except Exception as error:
-        Logger.error("[HANDLER][REACTIONROLE] DB error deleteRole -> " + error)
+        Logger.error("[HANDLER][REACTIONROLE] DB error deleteRole -> " + str(error))
             
 
 #Permet de récupérer la liste des rôles de réaction dans la base de données
-def getReactionRole(server_ID):
+def getReactionRole(serverID):
     requestFormat = """
-                    SELECT ID, channel_ID, message_ID, role_ID, emote, reaction_type
-                    FROM onRawReactionAdd
-                    WHERE server_ID = %s;
+                    SELECT ID, channelID, messageID, roleID, emote, reactionType
+                    FROM addon_reactionrole_reactions
+                    WHERE serverID = %s;
                     """
-    requestSettings = (server_ID,)
+    requestSettings = (serverID,)
     try:
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
         
-        if debug:
-            Logger.debug("[HANDLER][REACTIONROLE] Retrieving the list of reaction roles -> " + str(server_ID))
+        if debug == True:
+            Logger.debug("[HANDLER][REACTIONROLE] Retrieving the list of reaction roles -> " + str(serverID))
             
         return result
     
     except Exception as error:
-        Logger.error("[HANDLER][REACTIONROLE] DB error getReactionRole -> " + error)
+        Logger.error("[HANDLER][REACTIONROLE] DB error getReactionRole -> " + str(error))
