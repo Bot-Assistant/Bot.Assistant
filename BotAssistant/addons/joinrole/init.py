@@ -1,2 +1,0 @@
-cogEnabled = True
-cogFile = "cogJoinRole"

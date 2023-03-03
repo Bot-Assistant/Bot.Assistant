@@ -1,5 +1,7 @@
-from settings.settingBot import botVersion
+import services.serviceVerification as serviceVerification
+serviceVerification.packageVerification()
 
+from settings.settingBot import botVersion
 print("=============================================")
 print("█▄▄ █▀█ ▀█▀ ░ ▄▀█ █▀ █▀ █ █▀ ▀█▀ ▄▀█ █▄░█ ▀█▀")
 print("█▄█ █▄█ ░█░ ▄ █▀█ ▄█ ▄█ █ ▄█ ░█░ █▀█ █░▀█ ░█░")
@@ -9,7 +11,6 @@ print(f"            {botVersion}         ")
 
 # INIT LOG SYSTEM
 from services.serviceLogger import consoleLogger as Logger
-
 Logger.system("[BOT]The bot is loading")
 
 # INIT FILE SYSTEM
@@ -28,6 +29,7 @@ handlerDatabaseInit.databaseInit()
 import services.serviceBot as serviceBot
 serviceBot.classBot.initialize()
 bot = serviceBot.classBot.getBot()
+command = serviceBot.classBot.getCommands()
 
 
 
@@ -40,6 +42,7 @@ async def on_ready():
     Logger.system("The bot is now online")
     eventOnReady.onReady()
     stopCommand()
+
 
 
 from handlers import handlersServer

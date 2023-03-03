@@ -9,7 +9,7 @@ import settings.settingBot as settingBot
 def databaseCreation(tableName: str, columns: list):
     # Create database
     try:
-        Logger.database(f"[CONNECTION][{tableName}][INIT]Database connection success")
+        Logger.database(f"[CONNECTION][{tableName}][INIT]Table {tableName} initialization...")
 
         # Create Table
         requestFormat = f"""

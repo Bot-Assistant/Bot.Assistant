@@ -1,16 +1,21 @@
 import services.serviceBot as serviceBot
+import settings.settingColors as settingColors
+import settings.settingThumbnail as settingThumbnail
 from addons.configuration.handlers.handlerConfiguration import setLogsID
 
 
-async def logs(ctx, arg1):
-    if ctx.author.guild_permissions.manage_guild:
+async def logs(ctx, channel):
+    if ctx.author.guild_permissions.manage_guild:                  
+        setLogsID(ctx.guild.id, channel.id)
         
-        setLogsID(ctx.guild.id, arg1.id)
+        embed = serviceBot.classBot.getDiscord().Embed(title="Logs channel configuration", description="The logs channel has been configured.", color=settingColors.green)
+        embed.add_field(name="Channel", value=channel.mention, inline=False)
+        embed.set_thumbnail(url=settingThumbnail.pageWithCurl)
         
-        embed = serviceBot.classBot.getDiscord().Embed(title="Logs channel configuration", description="The logs channel is now: " + arg1.name, color=0x00ff00)
-        await ctx.respond(embed=embed)
-        
+        await ctx.respond(embed=embed, delete_after=10)
+    
     else:
+        embed = serviceBot.classBot.getDiscord().Embed(title="Logs channel configuration", description="You don't have the permission to do this.", color=settingColors.red)
+        embed.set_thumbnail(url=settingThumbnail.pageWithCurl)
         
-        embed = serviceBot.classBot.getDiscord().Embed(title="Logs channel configuration", description="You do not have permission to execute this command.", color=0xCD2B2B)
-        await ctx.respond(embed=embed)
+        await ctx.respond(embed=embed, delete_after=10)

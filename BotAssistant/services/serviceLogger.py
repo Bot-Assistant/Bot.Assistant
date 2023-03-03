@@ -124,3 +124,17 @@ class consoleLogger:
 
         #Print to console
         print(time, prefix + logContent)
+
+
+    def update(message):
+        #Get time
+        time = serviceTime.classTime.getHMS()
+
+        #Set prefix
+        prefix = boldType + yellowColor + "[UPDATE]" + endColor
+
+        #Set message
+        logContent = yellowColor + str(message) + endColor
+
+        #Print to console
+        print(time, prefix + logContent)
