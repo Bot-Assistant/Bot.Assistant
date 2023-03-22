@@ -1,28 +1,39 @@
-import addons.configuration.handlers.handlerConfiguration as handlerConfiguration
+
+import addons.Configuration.handlers.handlerConfiguration as handlerConfiguration
+import addons.Configuration.settings.settingThumbnail as settingThumbnail
+import addons.Configuration.settings.settingColors as settingColors
+import addons.Configuration.settings.settingLogsLevel as settingLogsLevel
 
 import services.serviceBot as serviceBot
-import settings.settingColors as settingColors
-import settings.settingThumbnail as settingThumbnail
+discord = serviceBot.classBot.getDiscord()
 
-async def logs_level(ctx, level):
-    if ctx.author.guild_permissions.manage_guild:
-        embed = serviceBot.classBot.getDiscord().Embed(title="Logs level configuration", description="The logs level has been configured.", color=settingColors.green)
-        embed.add_field(name="Level", value=level, inline=False)
-        embed.set_thumbnail(url=settingThumbnail.pageWithCurl)
+async def logsLevel(ctx, level):
 
-        match level:
-            case "📓 Debug":
-                handlerConfiguration.setLogsLevel(ctx.guild.id, 0)
-            case "📘 Info":
-                handlerConfiguration.setLogsLevel(ctx.guild.id, 1)
-            case "📙 Warn":
-                handlerConfiguration.setLogsLevel(ctx.guild.id, 2)
-            case "📕 Error":
-                handlerConfiguration.setLogsLevel(ctx.guild.id, 3)
-            case "⚠️ Fatal":
-                handlerConfiguration.setLogsLevel(ctx.guild.id, 4)
-    else:
-        embed = serviceBot.classBot.getDiscord().Embed(title="Logs level configuration", description="You don't have the permission to do this.", color=settingColors.red)
-        embed.set_thumbnail(url=settingThumbnail.pageWithCurl)
+    # PERMISSIONS CHECK
+    import addons.Configuration.functions.services.servicePermission as servicePermission
+    if await servicePermission.permissionCheck(ctx, "cmdLogsLevel") == False:
+        return
+    
+    # COMMAND
+    embed = discord.Embed(
+        title="Logs level configuration", 
+        description="The logs level has been configured.", 
+        color=settingColors.green
+    )
+    embed.add_field(name="Level", value=level, inline=False)
+    embed.set_thumbnail(url=settingThumbnail.settingsIcons)
 
-    await ctx.respond(embed=embed, delete_after=10)
+    match level:
+        case settingLogsLevel.level1:
+            handlerConfiguration.setLogsLevel(ctx.guild.id, 0)
+        case settingLogsLevel.level2:
+            handlerConfiguration.setLogsLevel(ctx.guild.id, 1)
+        case settingLogsLevel.level3:
+            handlerConfiguration.setLogsLevel(ctx.guild.id, 2)
+        case settingLogsLevel.level4:
+            handlerConfiguration.setLogsLevel(ctx.guild.id, 3)
+        case settingLogsLevel.level5:
+            handlerConfiguration.setLogsLevel(ctx.guild.id, 4)
+                
+
+    await ctx.respond(embed=embed)

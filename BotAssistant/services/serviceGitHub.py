@@ -17,10 +17,19 @@ def getLatestRelease(repository, version, author):
         time.sleep(5)
         return
 
+    repositoryVersion = gitRepository.json()['tag_name'].replace("v", "")
 
-    if version != gitRepository.json()['tag_name']:
+    # If the version is bigger than the latest release, it means that the version is a beta version
+    if version > repositoryVersion:
         Logger.update(f"Addon: {repository} ({version})")
-        Logger.update(f"New version available: {gitRepository.json()['tag_name']}")
+        Logger.update("🔰 Beta version")
+        time.sleep(5)
+        return
+
+    # If the version is different from the latest release, it means that a new version is available
+    elif version != repositoryVersion:
+        Logger.update(f"Addon: {repository} ({version})")
+        Logger.update(f"⚠️  New version available: {repositoryVersion}")
         Logger.update(f"Download link: {repositoryReleaseUrl}")
         time.sleep(5)
         return

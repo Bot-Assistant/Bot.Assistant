@@ -10,7 +10,6 @@ def fileWrite(file, message):
 # Create a folder if it does not exist
 def createFolder(folderName):
     if not os.path.exists(folderName):
-        Logger.warning("[FILEMANAGER]" + folderName + " folder does not exist")
         try:
             os.mkdir(folderName)
             Logger.info("[FILEMANAGER]" + folderName + " folder was created")

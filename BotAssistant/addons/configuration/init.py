@@ -17,6 +17,7 @@ cogFile = "cogConfiguration"
 packageDependencies = [
     "py-cord",
     "mysql-connector-python",
+    "prettytable"
 ]
 
 # List of addons required by the addon
@@ -26,3 +27,25 @@ addonDependencies = []
 addonPermissions = [
     "send_messages"
 ]
+
+# Name of the command and the permission associated with it
+# The permission can be a discord permission or a custom permission
+commandPermissions = {
+    # Permission to edit the bot's logs channel
+    "cmdLogsChannel" : "configuration.logs.channel",
+
+    # Permission to edit the bot's logs level
+    "cmdLogsLevel" : "configuration.logs.level",
+    
+    # Permission to add permissions of a role
+    "cmdPermissionAdd" : "discord.permission.manage_roles",
+
+    # Permission to remove permissions of a role
+    "cmdPermissionRemove" : "discord.permission.manage_roles",
+
+    # Permission to list the permissions of a role
+    "cmdPermissionList" : "discord.permission.manage_roles",
+
+    # Permission to check the bot's permissions
+    "cmdRequirements" : "discord.permission.manage_guild"
+}

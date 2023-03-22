@@ -1,3 +1,7 @@
+# INIT FILE SYSTEM
+import services.serviceFileManager as serviceFileManager
+serviceFileManager.createFolder("logs")
+
 import services.serviceVerification as serviceVerification
 serviceVerification.packageVerification()
 
@@ -12,10 +16,6 @@ print(f"            {botVersion}         ")
 # INIT LOG SYSTEM
 from services.serviceLogger import consoleLogger as Logger
 Logger.system("[BOT]The bot is loading")
-
-# INIT FILE SYSTEM
-import services.serviceFileManager as serviceFileManager
-serviceFileManager.createFolder("logs")
 
 # INIT CONFIG FILE SYSTEM
 import services.serviceFirstInit as serviceFirstInit

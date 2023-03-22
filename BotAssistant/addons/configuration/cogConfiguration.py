@@ -1,10 +1,26 @@
-import addons.configuration.functions.commands.commandLogs as commandLogs
-import addons.configuration.functions.commands.commandLogsLevel as commandLogsLevel
+# EXTERNAL IMPORTS
+import os
 
-import addons.configuration.init as init
+# ADDON IMPORTS
+import addons.Configuration.init as init
 
-import services.servicePermissionCheck as servicePermissionCheck
+import addons.Configuration.handlers.handlerDatabaseInit as handlerDatabaseInit
 
+import addons.Configuration.functions.commands.commandLogsChannel as commandLogsChannel
+import addons.Configuration.functions.commands.commandLogsLevel as commandLogsLevel
+import addons.Configuration.functions.commands.commandPermissionAdd as commandPermissionAdd
+import addons.Configuration.functions.commands.commandPermissionRemove as commandPermissionRemove
+import addons.Configuration.functions.commands.commandPermissionList as commandPermissionList
+import addons.Configuration.functions.commands.commandRequirements as commandRequirements
+
+import addons.Configuration.handlers.handlerPermission as handlerPermission
+
+import addons.Configuration.settings.settingLogsLevel as settingLogsLevel
+
+# BOTASSISTANT IMPORTS
+import services.serviceAddonManager as serviceAddonManager
+from services.serviceLogger import consoleLogger as Logger
+from settings.settingBot import debug
 
 # INIT BOT VARIABLES
 import services.serviceBot as serviceBot
@@ -20,35 +36,93 @@ class Configuration(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    # AUTOCOMPLETE
+    async def getAddonsList(ctx: discord.AutocompleteContext):
+        return os.listdir("addons")
+
+    async def getPermissionsListAddon(ctx: discord.AutocompleteContext):
+        addon = ctx.options["addon"]
+        return serviceAddonManager.getPermissionsList(addon)
+
+
+    async def getPermissionsListDB(ctx: discord.AutocompleteContext):
+        role = ctx.options["role"]
+        resultDatabase = handlerPermission.getPermissionsByRoleID(ctx.interaction.guild_id, role)
+
+        permissions = []
+        for permission in resultDatabase:
+            permissions.append(permission[1])
+
+        return permissions
+
+
     # INIT GROUP COMMAND
     groupConfiguration = discordCommands.SlashCommandGroup(init.cogName, "Various commands to configure the bot.")
+    groupPermission = groupConfiguration.create_subgroup("permission", "Various commands to configure the bot's permissions.")
+    groupLogs = groupConfiguration.create_subgroup("logs", "Various commands to configure the bot's logs.")
 
-    # Verify if the bot has the permissions
-    @groupConfiguration.command(name="permissions", description="Check the permissions of the bot")
-    async def cmdSFXPermissions(self, ctx: commands.Context):
-        await servicePermissionCheck.permissionCheck(ctx, init.addonPermissions)
+    # Verify if the bot has the prerequisites permissions
+    @groupConfiguration.command(name="requirements", description="Check the prerequisites permissions of the addon.")
+    async def cmdPermissions(self, ctx: commands.Context):
+        await commandRequirements.checkRequirements(ctx)
 
-    #t LOGS
-    @groupConfiguration.command(name="log", description="Allows you to define the bot's log channel.")
-    async def cmdLogs(
+    # Configuration Logs Channel
+    @groupLogs.command(name="channel", description="Allows you to define the bot's log channel.")
+    async def cmdLogsChannel(
         self,
         ctx, 
         channel: discord.Option(discord.TextChannel, required=True)
     ):
-        await commandLogs.logs(ctx, channel)
+        await commandLogsChannel.logsChannel(ctx, channel)
 
 
-    #t LOGS_LEVEL
-    @groupConfiguration.command(name="logs_level", description="Change the log level.")
-    async def cmdLanguage(
+    # Configuration Logs Level
+    @groupLogs.command(name="level", description="Change the log level.")
+    async def cmdLogsLevel(
         self,
         ctx, 
-        logs_level: discord.Option(str, "logs_level", choices=["📓 Debug","📘 Info","📙 Warn","📕 Error","⚠️ Fatal"], required=True)
+        logs_level: discord.Option(str, "logs_level", choices=settingLogsLevel.logsLevels, required=True)
     ):
-        await commandLogsLevel.logs_level(ctx, logs_level)
+        await commandLogsLevel.logsLevel(ctx, logs_level)
+
+
+    # Configuration Permissions Add
+    @groupPermission.command(name="add", description="Add a permission to a role.")
+    async def cmdPermissionAdd(
+        self,
+        ctx,
+        addon: discord.Option(str, autocomplete=discord.utils.basic_autocomplete(getAddonsList), description="Name of the addon"),
+        permission: discord.Option(str, autocomplete=discord.utils.basic_autocomplete(getPermissionsListAddon), description="Name of the permission"),
+        role: discord.Option(discord.Role, required=True)
+    ):
+        await commandPermissionAdd.add(ctx, addon, permission, role)
+
+
+    # Configuration Permissions Remove
+    @groupPermission.command(name="remove", description="Remove a permission from a role.")
+    async def cmdPermissionRemove(
+        self,
+        ctx,
+        role: discord.Option(discord.Role, required=True),
+        permission: discord.Option(str, autocomplete=discord.utils.basic_autocomplete(getPermissionsListDB), description="Name of the permission")
+    ):
+        await commandPermissionRemove.remove(ctx, role, permission)
+
+
+    # Configuration Permissions List
+    @groupPermission.command(name="list", description="List the permissions of a role.")
+    async def cmdPermissionList(
+        self,
+        ctx,
+        role: discord.Option(discord.Role, required=True)
+    ):
+        await commandPermissionList.list(ctx, role)
+
       
 
 def setup(bot):
+    if debug: Logger.debug("[COG][CONFIGURATION]Configuration cog init")
+    handlerDatabaseInit.databaseInit()
     bot.add_cog(Configuration(bot))
     
     

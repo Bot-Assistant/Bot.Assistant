@@ -1,2 +1,9 @@
+botVersion = "v0.8.1-pre-alpha"
+
+# If debug is enabled, the console will display more informations
+# It's better to disable it when the bot is in production
 debug = True
-botVersion = "v0.7.0-pre-alpha"
+
+# If color is enabled, the console will be colored
+# Some terminals don't support color, so it's better to disable it
+consoleColor = True

@@ -126,7 +126,7 @@ def packageVerification():
         os._exit(0)
 
     else:
-        Logger.install("✅ All dependencies are installed")
+        Logger.install("All dependencies are installed")
         Logger.system("The bot will start in 3 seconds")
         time.sleep(3)
         print("")
