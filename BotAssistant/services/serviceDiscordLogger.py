@@ -1,124 +1,104 @@
-import handlers.handlerDiscordLogger as handlerDiscordLogger
-import services.serviceBot as serviceBot
-import services.serviceFileManager as serviceFileManager
-import services.serviceTime as serviceTime
 from services.serviceLogger import consoleLogger
-from settings.settingColors import *
 
+import handlers.handlerDiscordLogger as handlerDiscordLogger
+import services.serviceTime as serviceTime
+import settings.settingColors as settingColors
+
+import services.serviceBot as serviceBot
+discord = serviceBot.classBot.getDiscord()
+bot = serviceBot.classBot.getBot()
 
 class discordLogger:
-	#0 debug
-    #1 info
-    #2 warn
-    #3 error
-    #4 fatal
 
-    async def debug(error, server_id):
-        logs_id = handlerDiscordLogger.getLogsID(server_id)
+    async def debug(ctx, title:str, error:str, commandName:str = None):
+
+        logsID = handlerDiscordLogger.getLogsID(ctx.guild.id)
         
-        if logs_id == None:
+        if logsID == None:
             return
         
-        logLevel = handlerDiscordLogger.getLogsLevel(server_id)
-        if logLevel == 0:
-            #Set message
-            message = "[DEBUG] " + serviceTime.classTime.getHMS() + " " + str(error)
-              
-            #Print to console
-            consoleLogger.debug(message)
-            
-            #Print log to log file
-            serviceFileManager.fileWrite("logs/" + serviceTime.classTime.getDMY() + ".log", message)
-            
-            #Send Embed
-            embed=serviceBot.classBot.getDiscord().Embed(title="📓 [DEBUG]", description=error, color=white)
+        if handlerDiscordLogger.getLogsLevel(ctx.guild.id) == 0:
+
+            consoleLogger.debug("[DISCORD] " + error)
+
+            embed=discord.Embed(title="📓 [DEBUG] " + title, description=error, color=settingColors.white)
             embed.set_footer(text=serviceTime.classTime.getHMS())
-            await serviceBot.classBot.getBot().get_channel(logs_id).send(embed=embed)
+
+            if commandName != None:
+                embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
+
+            await bot.get_channel(logsID).send(embed=embed)
             
             
-    async def info(error, server_id):
-        logs_id = handlerDiscordLogger.getLogsID(server_id)
+    async def info(ctx, title:str, error:str, commandName:str = None):
+        logsID = handlerDiscordLogger.getLogsID(ctx.guild.id)
         
-        if logs_id == None:
+        if logsID == None:
             return
         
-        logLevel = handlerDiscordLogger.getLogsLevel(server_id)
-        if logLevel <= 1:
-            #Set message
-            message = "[INFO] " + serviceTime.classTime.getHMS() + " " + str(error)
+        if handlerDiscordLogger.getLogsLevel(ctx.guild.id) <= 1:
+            consoleLogger.info("[DISCORD] " + error)
             
-            #Print log to log file
-            serviceFileManager.fileWrite("logs/" + serviceTime.classTime.getDMY() + ".log", message)
-            
-            #Send Embed
-            embed=serviceBot.classBot.getDiscord().Embed(title="📘 [INFO]", description=error, color=cyan)
-            logs_id = handlerDiscordLogger.getLogsID(server_id)
-            await serviceBot.classBot.getBot().get_channel(logs_id).send(embed=embed)
-        else:
-            print("[LOGS] Annulation de l'envoi de logs (Niveau 1)")
+            embed=discord.Embed(title="📘 [INFO] " + title, description=error, color=settingColors.cyan)
+            embed.set_footer(text=serviceTime.classTime.getHMS())
+
+            if commandName != None:
+                embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
+
+            await bot.get_channel(logsID).send(embed=embed)
     
     
-    async def warn(error, server_id):
-        logs_id = handlerDiscordLogger.getLogsID(server_id)
+    async def warn(ctx, title:str, error:str, commandName:str = None):
+        logsID = handlerDiscordLogger.getLogsID(ctx.guild.id)
         
-        if logs_id == None:
+        if logsID == None:
             return
         
-        logLevel = handlerDiscordLogger.getLogsLevel(server_id)
-        if logLevel <= 2:
-            #Set message
-            message = "[WARN] " + serviceTime.classTime.getHMS() + " " + str(error)
+        if handlerDiscordLogger.getLogsLevel(ctx.guild.id) <= 2:
+            consoleLogger.warn("[DISCORD] " + error)
             
-            #Print log to log file
-            serviceFileManager.fileWrite("logs/" + serviceTime.classTime.getDMY() + ".log", message)
-            
-            #Send Embed
-            embed=serviceBot.classBot.getDiscord().Embed(title="📙 [WARN]", description=error, color=yellow)
-            logs_id = handlerDiscordLogger.getLogsID(server_id)
-            await serviceBot.classBot.getBot().get_channel(logs_id).send(embed=embed)
-        else:
-            print("[LOGS] Annulation de l'envoi de logs (Niveau 2)")
+            embed=discord.Embed(title="📒 [WARN] " + title, description=error, color=settingColors.yellow)
+            embed.set_footer(text=serviceTime.classTime.getHMS())
+
+            if commandName != None:
+                embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
+
+            await bot.get_channel(logsID).send(embed=embed)
             
             
-    async def error(error, server_id):
-        logs_id = handlerDiscordLogger.getLogsID(server_id)
+    async def error(ctx, title:str, error:str, commandName:str = None):
+        logsID = handlerDiscordLogger.getLogsID(ctx.guild.id)
         
-        if logs_id == None:
+        if logsID == None:
             return
         
-        logLevel = handlerDiscordLogger.getLogsLevel(server_id)
-        if logLevel <= 3:
-            #Set message
-            message = "[ERROR] " + serviceTime.classTime.getHMS() + " " + str(error)
+        if handlerDiscordLogger.getLogsLevel(ctx.guild.id) <= 3:
+            consoleLogger.error("[DISCORD] " + error)
             
-            #Print log to log file
-            serviceFileManager.fileWrite("logs/" + serviceTime.classTime.getDMY() + ".log", message)
-            
-            #Send Embed
-            embed=serviceBot.classBot.getDiscord().Embed(title="📕 [ERROR]", description=error, color=orange)
-            logs_id = handlerDiscordLogger.getLogsID(server_id)
-            await serviceBot.classBot.getBot().get_channel(logs_id).send(embed=embed)
-        else:
-            print("[LOGS] Annulation de l'envoi de logs (Niveau 3)")
-    
-    
-    async def critical(error, server_id):
-        logs_id = handlerDiscordLogger.getLogsID(server_id)
+            embed=discord.Embed(title="📙 [ERROR] " + title, description=error, color=settingColors.orange)
+            embed.set_footer(text=serviceTime.classTime.getHMS())
+
+            if commandName != None:
+                embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
+
+            await bot.get_channel(logsID).send(embed=embed)
         
-        if logs_id == None:
+        
+    
+    
+    async def critical(ctx, title:str, error:str, commandName:str = None):
+        logsID = handlerDiscordLogger.getLogsID(ctx.guild.id)
+        
+        if logsID == None:
             return
         
-        logLevel = handlerDiscordLogger.getLogsLevel(server_id)
-        if logLevel <= 4:
-            #Set message
-            message = "[CRITICAL] " + serviceTime.classTime.getHMS() + " " + str(error)
+        if handlerDiscordLogger.getLogsLevel(ctx.guild.id) <= 4:
+            consoleLogger.critical("[DISCORD] " + error)
             
-            #Print log to log file
-            serviceFileManager.fileWrite("logs/" + serviceTime.classTime.getDMY() + ".log", message)
-            
-            #Send Embed
-            embed=serviceBot.classBot.getDiscord().Embed(title="⚠️ [CRITICAL]", description=error, color=red)
-            logs_id = handlerDiscordLogger.getLogsID(server_id)
-            await serviceBot.classBot.getBot().get_channel(logs_id).send(embed=embed)
-        else:
-            print("[LOGS] Annulation de l'envoi de logs (Niveau 4)")
+            embed=discord.Embed(title="📕 [CRITICAL] " + title, description=error, color=settingColors.red)
+            embed.set_footer(text=serviceTime.classTime.getHMS())
+
+            if commandName != None:
+                embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
+
+            await bot.get_channel(logsID).send(embed=embed)
