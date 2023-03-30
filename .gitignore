@@ -1,6 +1,9 @@
-
 *.pyc
 *.log
 BotAssistant/settings/settingDatabase.py
 BotAssistant/settings/settingToken.py
-BotAssistant/addons/soundplay/sound/*
+BotAssistant/settings/settingColors.py
+BotAssistant/addons/joinrole/
+BotAssistant/addons/reactionrole/
+BotAssistant/addons/levelSystem/
+BotAssistant/addons/soundplay/
