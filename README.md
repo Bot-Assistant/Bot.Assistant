@@ -41,6 +41,12 @@ This bot is inspired by game servers like Minecraft. You will be able to configu
   - `pip install py-cord mysql-connector-python importlib_metadata requests prettytable`
 4. Make sure you have created a database
 5. Run bot.py with Python (run.bat on windows)
+6. Configure the bot database when the bot create the file `settingDatabase.py`
+7. Restart the bot
+8. Configure the bot token when the bot create the file `settingToken.py`
+9. (Facultative) Install addons in the folder `addons`
+10. Restart the bot
+11. Enjoy!
 
 
 ## Configuration
