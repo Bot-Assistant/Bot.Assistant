@@ -1,9 +1,23 @@
+# Useless files
 *.pyc
 *.log
+
+ 
+# Settings !IMPORTANT!
 BotAssistant/settings/settingDatabase.py
 BotAssistant/settings/settingToken.py
-BotAssistant/settings/settingColors.py
+
+
+# All addons
 BotAssistant/addons/joinrole/
 BotAssistant/addons/reactionrole/
 BotAssistant/addons/levelSystem/
 BotAssistant/addons/soundplay/
+BotAssistant/addons/Announcements/
+BotAssistant/addons/Votes/
+BotAssistant/addons/Moderator/
+BotAssistant/addons/Traductor/
+
+
+# Dev Tools
+BotAssistant/addons/-Tests/

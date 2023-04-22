@@ -44,29 +44,47 @@ def databaseCreation(tableName: str, columns: list):
 
 # Make a request to the database without returning a result
 def makeRequest(requestFormat, requestSettings):
-        
+        # Connect to the database
         database = mysql.connector.connect(**settingDatabase.connection)
+
+        # Create a cursor
         cursor = database.cursor()
 
+        # Execute the request
         cursor.execute(requestFormat, requestSettings)
 
+        # Commit the changes
         database.commit()
+
+        # Close the cursor
         cursor.close()
+
+        # Close the database
         database.close()
 
 
 # Find a result in the database and return it
 def getInfoRequest(requestFormat, requestSettings):
-        
+        # Connect to the database
         database = mysql.connector.connect(**settingDatabase.connection)
+
+        # Create a cursor with cache
         cursor = database.cursor(buffered=True)
 
+        # Execute the request
         cursor.execute(requestFormat, requestSettings)
         
+        # Get the result
         result = cursor.fetchall()
 
+        # Close the cursor
         database.commit()
+
+        # Close the database
         cursor.close()
+
+        # Close the database
         database.close()
-       
+        
+        # Return the result
         return result

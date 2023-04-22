@@ -74,7 +74,6 @@ class Configuration(commands.Cog):
         ctx, 
         channel: discord.Option(discord.TextChannel, required=True)
     ):
-        await DiscordLogger.info(ctx, init.cogName, ctx.author.name + " has used the logs channel command.", str(ctx.command))
         await commandLogsChannel.logsChannel(ctx, channel)
 
 
@@ -85,7 +84,6 @@ class Configuration(commands.Cog):
         ctx, 
         logs_level: discord.Option(str, "logs_level", choices=settingLogsLevel.logsLevels, required=True)
     ):
-        await DiscordLogger.info(ctx, init.cogName, ctx.author.name + " has used the logs level command.", str(ctx.command))
         await commandLogsLevel.logsLevel(ctx, logs_level)
 
 
@@ -123,11 +121,10 @@ class Configuration(commands.Cog):
     ):
         await DiscordLogger.info(ctx, init.cogName, ctx.author.name + " has used the permission list command.", str(ctx.command))
         await commandPermissionList.list(ctx, role)
-
       
 
 def setup(bot):
-    if debug: Logger.debug("[COG][CONFIGURATION]Configuration cog init")
+    if debug: Logger.debug("Loading cog: " + init.cogName)
     handlerDatabaseInit.databaseInit()
     bot.add_cog(Configuration(bot))
     

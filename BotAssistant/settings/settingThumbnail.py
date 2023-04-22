@@ -1,21 +1,21 @@
 # 𝗘𝗠𝗢𝗝𝗜𝗦 
 # Emoji: 📃
-pageWithCurlIcons = "https://em-content.zobj.net/thumbs/72/apple/325/page-with-curl_1f4c3.png"
+pageWithCurlIcons = "https://cdn-0.emojis.wiki/emoji-pics/microsoft/page-with-curl-microsoft.png"
 
 # Emoji: 📦
-packageIcons = "https://em-content.zobj.net/thumbs/72/apple/325/package_1f4e6.png"
+packageIcons = "https://cdn-0.emojis.wiki/emoji-pics/microsoft/package-microsoft.png"
 
 # Emoji: ⚖️
-balanceScaleIcons = "https://em-content.zobj.net/thumbs/72/apple/325/balance-scale_2696-fe0f.png"
+balanceScaleIcons = "https://cdn-0.emojis.wiki/emoji-pics/microsoft/balance-scale-microsoft.png"
 
 # Emoji: 📈
-chartIncreasingIcons = "https://em-content.zobj.net/thumbs/72/apple/325/chart-increasing_1f4c8.png"
+chartIncreasingIcons = "https://cdn-0.emojis.wiki/emoji-pics/microsoft/chart-increasing-microsoft.png"
 
 # Emoji: 📉
-chartDecreasingIcons = "https://em-content.zobj.net/thumbs/72/apple/325/chart-decreasing_1f4c9.png"
+chartDecreasingIcons = "https://cdn-0.emojis.wiki/emoji-pics/microsoft/chart-decreasing-microsoft.png"
 
 # Emoji: 📊
-barChartIcons = "https://em-content.zobj.net/thumbs/72/apple/325/bar-chart_1f4ca.png"
+barChartIcons = "https://cdn-0.emojis.wiki/emoji-pics/microsoft/bar-chart-microsoft.png"
 
 
 # 𝗢𝗧𝗛𝗘𝗥𝗦 𝗜𝗖𝗢𝗡𝗦

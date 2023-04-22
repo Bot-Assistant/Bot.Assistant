@@ -5,8 +5,8 @@ from sys import exit
 # IMPORT SERVICES
 from services.serviceLogger import consoleLogger as Logger
 
-# Contenu du fichier settingsDatabase.py
-databaseFileContent = """# Veuillez remplir les champs ci-dessous pour configurer la base de donnees
+# Content of the settingDatabase.py file
+databaseFileContent = """# Please fill in the fields below to configure the database
 connection = {
     "host": "",
     "database": "",
@@ -15,13 +15,13 @@ connection = {
 }
 """
 
-# Contenu du fichier settingsToken.py
-tokenFileContent = """# Veuillez remplir le champ ci-dessous pour configurer le token du bot
+# Content of the settingToken.py file
+tokenFileContent = """# Please fill in the field below to configure the bot token
 token = ""
 """
 
-# CREATION DES FICHIERS DE CONFIGURATION
-# Fonction d'initialisation du fichier settingDatabase.py
+# CREATION OF CONFIGURATION FILES
+# Initialization function of the settingDatabase.py file
 def databaseFileInit():    
     file = open("settings/settingDatabase.py","w")
     file.write(databaseFileContent)
@@ -30,7 +30,7 @@ def databaseFileInit():
     Logger.install("[CONFIG]Please fill the database config file")
     exit(0)
 
-# Fonction d'initialisation du fichier settingsToken.py
+# Function to initialize the settingToken.py file
 def tokenFileInit():    
     file = open("settings/settingToken.py","w")
     file.write(tokenFileContent)
@@ -40,18 +40,18 @@ def tokenFileInit():
     exit(0)
     
 
-# VERIFICATION DES FICHIERS DE CONFIGURATION
-# Fonction de vérification des fichiers de configuration
+# CHECK CONFIGURATION FILES
+# Configuration file verification function
 def firstStartCheck():
     
-    # Vérification de l'existence des fichiers de configuration settingsToken.py
+    # Checking the existence of the settingToken.py configuration files
     if os.path.exists("settings/settingDatabase.py"): 
         Logger.info("[CONFIG]Database config file found")
     else:
         Logger.warning("[CONFIG]Database config file not found")
         databaseFileInit()
         
-    # Vérification de l'existence des fichiers de configuration settingDatabase.py
+    # Checking the existence of the settingDatabase.py configuration files
     if os.path.exists("settings/settingToken.py"): 
         Logger.info("[CONFIG]Token config file found")
     else:

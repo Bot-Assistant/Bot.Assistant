@@ -35,13 +35,13 @@ command = serviceBot.classBot.getCommands()
 
 # █▀█ █▄░█   █▀█ █▀▀ ▄▀█ █▀▄ █▄█
 # █▄█ █░▀█   █▀▄ ██▄ █▀█ █▄▀ ░█░
-from services.serviceStop import stopCommand
+import services.serviceStop as serviceStop
 import functions.events.eventOnReady as eventOnReady
 @bot.event
 async def on_ready():
     Logger.system("The bot is now online")
     eventOnReady.onReady()
-    stopCommand()
+    serviceStop.consoleCommand()
 
 
 

@@ -2,28 +2,33 @@ import sys
 import threading
 import os
 
-from services import serviceCleaner as cleaner
+import services.serviceCleaner as cleaner
 from services.serviceLogger import consoleLogger as Logger
 
 
-def stopCommand():
-    def stop():
+def consoleCommand():
+
+    def console():
         
-        print("Type 'stop' to stop the bot and clean the files")
+        print("Type 'stop [-c]' to stop the bot and clean the files")
 
         while True:
 
             input = sys.stdin.readline()
 
-            if "stop" in input:
-                Logger.system("The bot is now offline")
+            if "stop -c" in input:
+                Logger.system("The bot is now offline and the files are cleaned")
                 cleaner.clean(".")
                 os._exit(0)
             
-            elif "exit" in input:
+            elif "stop" in input:
                 Logger.system("The bot is now offline")
                 os._exit(0)
+
+            else:
+                Logger.system("The command is not valid")
                 
         
-    threadStop = threading.Thread(target=stop)
+    threadStop = threading.Thread(target=console)
+
     threadStop.start()
