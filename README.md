@@ -48,7 +48,7 @@ This bot is inspired by game servers like Minecraft. You will be able to configu
 | OS Compatibility | Database Compatibility |
 |------------------|------------------------|
 | Linux ✅          | Maria DB ✅             |
-| Windows ✅        | SQLite ❌               |
+| Windows ✅        | SQLite ✅               |
 | MacOS (Linux) ✅  | MySQL ❌                |
 
 
