@@ -15,7 +15,7 @@ connection = {
 }
 
 # Only for sqlite
-# ⚠️ Do not let this field empty if you use sqlite
+# Do not let this field empty if you use sqlite
 sqliteFile = "defaultFile"
 """
 
