@@ -1,7 +1,11 @@
-import mysql.connector
-import settings.settingDatabase as settingDatabase
-from services.serviceLogger import consoleLogger as Logger
 import sys
+import sqlite3
+
+import mysql.connector
+
+from services.serviceLogger import consoleLogger as Logger
+
+import settings.settingDatabase as settingDatabase
 import settings.settingBot as settingBot
 
 
@@ -11,24 +15,63 @@ def databaseCreation(tableName: str, columns: list):
     try:
         Logger.database(f"[CONNECTION][{tableName}][INIT]Table {tableName} initialization...")
 
-        # Create Table
-        requestFormat = f"""
-                CREATE TABLE IF NOT EXISTS {tableName} (
+        if settingBot.databaseType == "MariaDB":
+            # Create Table MariaDB
+            requestFormat = f"""
+                    CREATE TABLE IF NOT EXISTS {tableName} (
                     ID INT NOT NULL AUTO_INCREMENT,
                     PRIMARY KEY (ID)
                     );
-                """
-        requestSettings = ()
+                    """
+            requestSettings = ()
+        elif settingBot.databaseType == "SQLite":
+
+            if settingDatabase.sqliteFile == "":
+                Logger.critical(f"Oups, you forgot to fill in the sqliteFile field in the settingDatabase.py file")
+                sys.exit(0)
+
+            # Create Table SQLite
+            requestFormat = f"""
+                    CREATE TABLE IF NOT EXISTS "{tableName}" (
+                    ID INTEGER PRIMARY KEY AUTOINCREMENT
+                    )
+                    """
+            requestSettings = []
 
         makeRequest(requestFormat, requestSettings)
 
+
+
         # Add columns
         for column in columns:
-            requestFormat = f"""
-                    ALTER TABLE {tableName}
-                    ADD COLUMN IF NOT EXISTS """ + column[0] + """ """ + column[1] + """;
-                    """
-            requestSettings = ()
+
+
+            if settingBot.databaseType == "MariaDB":
+                requestFormat = f"""
+                        ALTER TABLE {tableName}
+                        ADD COLUMN IF NOT EXISTS {column[0]} {column[1]};
+                        """
+                requestSettings = ()
+
+
+            elif settingBot.databaseType == "SQLite":
+                
+                requestFormat = f"""
+                        PRAGMA table_info("{tableName}");
+                        """
+                requestSettings = []
+
+                result = getInfoRequest(requestFormat, requestSettings)
+
+                columnList = [columnArray[1] for columnArray in result]
+
+                if column[0] not in columnList:
+                    requestFormat = f"""
+                            ALTER TABLE "{tableName}"
+                            ADD COLUMN "{column[0]}" {column[1]};
+                            """
+                    requestSettings = []
+            
 
             makeRequest(requestFormat, requestSettings)
 
@@ -44,8 +87,20 @@ def databaseCreation(tableName: str, columns: list):
 
 # Make a request to the database without returning a result
 def makeRequest(requestFormat, requestSettings):
-        # Connect to the database
-        database = mysql.connector.connect(**settingDatabase.connection)
+
+        if settingBot.databaseType == "MariaDB":
+            # Connect to the database
+            database = mysql.connector.connect(**settingDatabase.connection)
+
+        elif settingBot.databaseType == "SQLite":
+            # Connect to the database
+            database = sqlite3.connect(settingDatabase.sqliteFile + ".db")
+
+            requestFormat = requestFormat.replace("%s", "?")
+
+            # Convert the tuple to a list
+            requestSettings = list(requestSettings)
+                
 
         # Create a cursor
         cursor = database.cursor()
@@ -65,11 +120,23 @@ def makeRequest(requestFormat, requestSettings):
 
 # Find a result in the database and return it
 def getInfoRequest(requestFormat, requestSettings):
-        # Connect to the database
-        database = mysql.connector.connect(**settingDatabase.connection)
+
+        if settingBot.databaseType == "MariaDB":
+            # Connect to the database
+            database = mysql.connector.connect(**settingDatabase.connection)
+        
+        elif settingBot.databaseType == "SQLite":
+            # Connect to the database
+            database = sqlite3.connect(settingDatabase.sqliteFile + ".db")
+
+            requestFormat = requestFormat.replace("%s", "?")
+
+            # Convert the tuple to a list
+            requestSettings = list(requestSettings)
+
 
         # Create a cursor with cache
-        cursor = database.cursor(buffered=True)
+        cursor = database.cursor()
 
         # Execute the request
         cursor.execute(requestFormat, requestSettings)

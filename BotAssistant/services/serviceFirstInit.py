@@ -13,6 +13,10 @@ connection = {
     "user": "",
     "password": ""
 }
+
+# Only for sqlite
+# ⚠️ Do not let this field empty if you use sqlite
+sqliteFile = "defaultFile"
 """
 
 # Content of the settingToken.py file

@@ -46,8 +46,9 @@ def getServers():
                     SELECT serverID
                     FROM servers
                     """
+    requestSettings = ()
     try:
-        result = serviceDatabase.getInfoRequest(requestFormat, None)
+        result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
         
         if debug == True: 
             Logger.debug("[HANDLER][BOTASSISTANT] Get servers from the DB " + str(result))

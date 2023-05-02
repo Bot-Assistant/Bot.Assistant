@@ -2,6 +2,10 @@
 import services.serviceFileManager as serviceFileManager
 serviceFileManager.createFolder("logs")
 
+# Install dependencies
+import services.serviceDependencies as serviceDependencies
+serviceDependencies.installDependencies()
+
 import services.serviceVerification as serviceVerification
 serviceVerification.packageVerification()
 
