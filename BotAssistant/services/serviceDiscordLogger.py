@@ -27,7 +27,10 @@ class discordLogger:
             if commandName != None:
                 embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
 
-            await bot.get_channel(logsID).send(embed=embed)
+            try:
+                await bot.get_channel(logsID).send(embed=embed)
+            except:
+                pass
             
             
     async def info(ctx, title:str, error:str, commandName:str = None):
@@ -45,7 +48,10 @@ class discordLogger:
             if commandName != None:
                 embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
 
-            await bot.get_channel(logsID).send(embed=embed)
+            try:
+                await bot.get_channel(logsID).send(embed=embed)
+            except:
+                pass
     
     
     async def warn(ctx, title:str, error:str, commandName:str = None):
@@ -63,7 +69,10 @@ class discordLogger:
             if commandName != None:
                 embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
 
-            await bot.get_channel(logsID).send(embed=embed)
+            try:
+                await bot.get_channel(logsID).send(embed=embed)
+            except:
+                pass
             
             
     async def error(ctx, title:str, error:str, commandName:str = None):
@@ -81,7 +90,10 @@ class discordLogger:
             if commandName != None:
                 embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
 
-            await bot.get_channel(logsID).send(embed=embed)
+            try:
+                await bot.get_channel(logsID).send(embed=embed)
+            except:
+                pass
         
         
     
@@ -101,4 +113,7 @@ class discordLogger:
             if commandName != None:
                 embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
 
-            await bot.get_channel(logsID).send(embed=embed)
+            try:
+                await bot.get_channel(logsID).send(embed=embed)
+            except:
+                pass

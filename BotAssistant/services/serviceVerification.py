@@ -9,6 +9,10 @@ import settings.settingBot as settingBot
 
 def packageVerification():
 
+    if settingBot.addonVerification == False:
+        Logger.system("Addon verification is disabled")
+        return
+
     Logger.system("Verifying packages...")
     
     if settingBot.debug:
@@ -87,7 +91,7 @@ def packageVerification():
 
                 if settingBot.debug:
                     time.sleep(1)
-                    print("")
+                    print("ㅤ")
     
 
 

@@ -4,6 +4,7 @@ import os
 # ADDON IMPORTS
 import addons.Configuration.init as init
 
+import addons.Configuration.functions.commands.commandHelpCommands as commandHelpCommands
 import addons.Configuration.functions.commands.commandLogsChannel as commandLogsChannel
 import addons.Configuration.functions.commands.commandLogsLevel as commandLogsLevel
 import addons.Configuration.functions.commands.commandPermissionAdd as commandPermissionAdd
@@ -43,6 +44,14 @@ class Configuration(commands.Cog):
     async def getPermissionsListAddon(ctx: discord.AutocompleteContext):
         addon = ctx.options["addon"]
         return serviceAddonManager.getPermissionsList(addon)
+    
+    async def getCommandsListAddon(ctx: discord.AutocompleteContext):
+        commandList = []
+
+        for command in bot.commands:
+            commandList.append(command.name)
+
+        return commandList
 
 
     async def getPermissionsListDB(ctx: discord.AutocompleteContext):
@@ -57,9 +66,25 @@ class Configuration(commands.Cog):
 
 
     # INIT GROUP COMMAND
-    groupConfiguration = discordCommands.SlashCommandGroup(init.cogName, "Various commands to configure the bot.")
-    groupPermission = groupConfiguration.create_subgroup("permission", "Various commands to configure the bot's permissions.")
-    groupLogs = groupConfiguration.create_subgroup("logs", "Various commands to configure the bot's logs.")
+    # Help Commands
+    groupHelp = discordCommands.SlashCommandGroup("help", "Various commands to help you.")
+
+    # Configuration Commands
+    groupConfiguration = discordCommands.SlashCommandGroup(init.cogName, "🔶 Group of commands to configure the bot.")
+    groupPermission = groupConfiguration.create_subgroup("permission", "🔶 Group of commands to configure the users permissions.")
+    groupLogs = groupConfiguration.create_subgroup("logs", "🔶 Group of commands to configure the logs.")
+
+    # Give all commands information
+    @groupHelp.command(name="command", description="Display the help message of the addon.")
+    async def cmdHelpCommands(
+        self, 
+        ctx: commands.Context,
+
+        command: discord.Option(str, description="The command you want to get help for.", required=True, autocomplete=discord.utils.basic_autocomplete(getCommandsListAddon))
+    ):
+        await DiscordLogger.info(ctx, init.cogName, ctx.author.name + " has used the help commands command.", str(ctx.command))
+        await commandHelpCommands.helpCommands(ctx, command)
+
 
     # Verify if the bot has the prerequisites permissions
     @groupConfiguration.command(name="requirements", description="Check the prerequisites permissions of the addon.")

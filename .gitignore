@@ -9,15 +9,17 @@ BotAssistant/settings/settingToken.py
 
 
 # All addons
-BotAssistant/addons/joinrole/
-BotAssistant/addons/reactionrole/
-BotAssistant/addons/levelSystem/
-BotAssistant/addons/soundplay/
+BotAssistant/addons/JoinRole/
+BotAssistant/addons/ReactionRole/
+BotAssistant/addons/LevelSystem/
+BotAssistant/addons/Soundplay/
 BotAssistant/addons/Announcements/
 BotAssistant/addons/Votes/
 BotAssistant/addons/Moderator/
 BotAssistant/addons/Traductor/
-
+BotAssistant/addons/AutoChannels/
+# BotAssistant/addons/TicketManager/
 
 # Dev Tools
 BotAssistant/addons/-Tests/
+updateAddons.py
