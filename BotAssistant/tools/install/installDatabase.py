@@ -1,5 +1,6 @@
 import os
 import re
+import mysql.connector
 
 import settings.settingBot as settingBot
 
@@ -45,6 +46,13 @@ def install(defaultDatabase: str):
         defaultDatabase = defaultDatabase.replace("defaultDatabaseName", databaseName)
         defaultDatabase = defaultDatabase.replace("defaultUserName", databaseUser)
         defaultDatabase = defaultDatabase.replace("defaultPassword", databasePassword)
+
+        # Test the connection
+        try:
+            mysql.connector.connect(host=databaseHost, user=databaseUser, password=databasePassword, database=databaseName)
+        except:
+            print("The connection to the database failed, please retry")
+            os._exit(0)
 
         # Write the file
         with open("settings/settingDatabase.py", "w") as file:
