@@ -1,5 +1,5 @@
 # We recommend you to not change botVersion
-botVersion = "v0.10.1-alpha"
+botVersion = "v0.10.2-alpha"
 
 # If debug is enabled, the console will display more informations
 # It's better to disable it when the bot is in production

@@ -13,7 +13,7 @@ import settings.settingBot as settingBot
 def databaseCreation(tableName: str, columns: list):
     # Create database
     try:
-        Logger.database(f"[CONNECTION][{tableName}][INIT]Table {tableName} initialization...")
+        Logger.table(f"[CONNECTION][{tableName}][INIT]Table {tableName} initialization...")
 
         if settingBot.databaseType == "MariaDB":
             # Create Table MariaDB
@@ -75,12 +75,19 @@ def databaseCreation(tableName: str, columns: list):
 
             makeRequest(requestFormat, requestSettings)
 
-            Logger.table(f"[HANDLER][{tableName}][INIT]Column {column[0]} initialization success")
+            Logger.colomn(f"[HANDLER][{tableName}][INIT]Column {column[0]} initialization success")
 
-        Logger.database(f"[HANDLER][{tableName}][INIT]Table {tableName} initialization success")
+        Logger.table(f"[HANDLER][{tableName}][INIT]Table {tableName} initialization success")
            
     except Exception as error:
         Logger.critical(f"[HANDLER][{tableName}][INIT]Table {tableName} initialization error -> " + str(error))
+        
+        # Print the complete error traceback
+        Logger.critical(f"[HANDLER][{tableName}][INIT]Table {tableName} initialization error -> " + str(sys.exc_info()))
+
+        # Print database error
+        Logger.critical(f"[HANDLER][{tableName}][INIT]Table {tableName} initialization error -> " + str(error.__class__.__name__))
+
         sys.exit(0)
 
 

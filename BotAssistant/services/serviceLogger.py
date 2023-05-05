@@ -57,13 +57,13 @@ class Logger:
 
     colorDict = {
         # Initialization logs
-        "system": "\033[45m\033[90m", # Background #800080 Text #808080
-        "install": "\033[46m", # Background #008080 Text -
-        "update": "\033[42m", # Background #008000 Text -
+        "system": "\033[45m\033[97m", # Background #800080 Text #FFFFFF
+        "install": "\033[46m\033[97m", # Background #008080 Text #FFFFFF
+        "update": "\033[42m\033[97m", # Background #008000 Text #FFFFFF
 
         # Database logs
-        "database": "\033[33m", # Background - Text #808000
-        "table": "\033[34m", # Background - Text #000080
+        "table": "\033[33m", # Background - Text #808000
+        "colomn": "\033[34m", # Background - Text #000080
 
         # Information logs
         "debug": "\033[96m", # Background - Text #00FFFF
@@ -79,8 +79,8 @@ class Logger:
         "install": "[INSTALL]",
         "update": "[UPDATE]",
 
-        "database": "[DATABASE]",
         "table": "[TABLE]",
+        "colomn": "[COLOMN]",
 
         "debug": "[DEBUG]",
         "info": "[INFO]",
@@ -96,13 +96,12 @@ class Logger:
             consoleColor = Logger.colorDict[type]
             prefix = Logger.prefixDict[type]
 
-            boldType = "\033[1m"
             endColor = "\033[0m"
+            
         else:
             consoleColor = ""
             prefix = Logger.prefixDict[type]
 
-            boldType = ""
             endColor = ""
 
         if settingBot.debug == False and type == "debug":
@@ -113,7 +112,7 @@ class Logger:
         logHMS = serviceTime.getHMS()
 
         # Set message
-        logPrefix = consoleColor + boldType + prefix + endColor
+        logPrefix = consoleColor + prefix + endColor
         logMessage = consoleColor + message + endColor
 
         # Print message with Prefix in color and bold
@@ -136,11 +135,11 @@ class Logger:
 
 
     # Database logs
-    def database(message):
-        Logger.write("database", message)
-
     def table(message):
         Logger.write("table", message)
+
+    def colomn(message):
+        Logger.write("colomn", message)
 
 
     # Information logs
