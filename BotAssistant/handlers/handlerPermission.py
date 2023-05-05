@@ -1,5 +1,5 @@
 import services.serviceDatabase as serviceDatabase 
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 
 from settings.settingBot import debug
 
@@ -15,8 +15,7 @@ def roleHasPermission(serverID, permissionName, roleID):
     try:
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
         
-        if debug == True: 
-            Logger.debug("[HANDLER][BOTASSISTANT] Verify if the role has the permission " + str(result))
+        Logger.debug("[HANDLER][BOTASSISTANT] Verify if the role has the permission " + str(result))
             
         if result == []:
             return False

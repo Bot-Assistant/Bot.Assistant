@@ -1,5 +1,5 @@
 import services.serviceDatabase as serviceDatabase 
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 
 from settings.settingBot import debug
 
@@ -16,8 +16,7 @@ def addPermission(serverID, addonName, permissionName, roleID):
     try:
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
-        if debug == True: 
-            Logger.debug("[HANDLER][BOTASSISTANT] Adding a permission to the DB " + str(serverID))        
+        Logger.debug("[HANDLER][BOTASSISTANT] Adding a permission to the DB " + str(serverID))        
         
     except Exception as error:
         Logger.error("[HANDLER][BOTASSISTANT] DB error addPermission -> " + str(error))
@@ -35,8 +34,7 @@ def removePermission(serverID, permissionName, roleID):
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
         
-        if debug == True: 
-            Logger.debug("[HANDLER][BOTASSISTANT] Deleting a permission from the DB " + str(serverID))
+        Logger.debug("[HANDLER][BOTASSISTANT] Deleting a permission from the DB " + str(serverID))
             
     except Exception as error:
         Logger.error("[HANDLER][BOTASSISTANT] DB error delPermission -> " + str(error))
@@ -53,8 +51,7 @@ def getPermissionsByRoleID(serverID, roleID):
     try:
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
         
-        if debug == True: 
-            Logger.debug("[HANDLER][BOTASSISTANT] Get permissions from the DB " + str(result))
+        Logger.debug("[HANDLER][BOTASSISTANT] Get permissions from the DB " + str(result))
             
         return result
         
@@ -73,8 +70,7 @@ def getRoles(serverID):
     try:
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
         
-        if debug == True: 
-            Logger.debug("[HANDLER][BOTASSISTANT] Get roles from the DB " + str(result))
+        Logger.debug("[HANDLER][BOTASSISTANT] Get roles from the DB " + str(result))
             
         return result
         
@@ -92,8 +88,7 @@ def permissionExists(serverID, permissionName, roleID):
     try:
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
         
-        if debug == True: 
-            Logger.debug("[HANDLER][BOTASSISTANT] Get permissions from the DB " + str(result))
+        Logger.debug("[HANDLER][BOTASSISTANT] Get permissions from the DB " + str(result))
             
         if result == []:
             return False

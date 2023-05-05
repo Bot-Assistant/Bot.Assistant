@@ -1,4 +1,4 @@
-from services.serviceLogger import consoleLogger
+from services.serviceLogger import Logger
 
 import handlers.handlerDiscordLogger as handlerDiscordLogger
 import services.serviceTime as serviceTime
@@ -19,10 +19,10 @@ class discordLogger:
         
         if handlerDiscordLogger.getLogsLevel(ctx.guild.id) == 0:
 
-            consoleLogger.debug("[DISCORD] " + error)
+            Logger.debug("[DISCORD] " + error)
 
             embed=discord.Embed(title="📓 [DEBUG] " + title, description=error, color=settingColors.white)
-            embed.set_footer(text=serviceTime.classTime.getHMS())
+            embed.set_footer(text=serviceTime.getHMS())
 
             if commandName != None:
                 embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
@@ -40,10 +40,10 @@ class discordLogger:
             return
         
         if handlerDiscordLogger.getLogsLevel(ctx.guild.id) <= 1:
-            consoleLogger.info("[DISCORD] " + error)
+            Loggerinfo("[DISCORD] " + error)
             
             embed=discord.Embed(title="📘 [INFO] " + title, description=error, color=settingColors.cyan)
-            embed.set_footer(text=serviceTime.classTime.getHMS())
+            embed.set_footer(text=serviceTime.getHMS())
 
             if commandName != None:
                 embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
@@ -61,10 +61,10 @@ class discordLogger:
             return
         
         if handlerDiscordLogger.getLogsLevel(ctx.guild.id) <= 2:
-            consoleLogger.warn("[DISCORD] " + error)
+            Logger.warning("[DISCORD] " + error)
             
             embed=discord.Embed(title="📒 [WARN] " + title, description=error, color=settingColors.yellow)
-            embed.set_footer(text=serviceTime.classTime.getHMS())
+            embed.set_footer(text=serviceTime.getHMS())
 
             if commandName != None:
                 embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
@@ -82,10 +82,10 @@ class discordLogger:
             return
         
         if handlerDiscordLogger.getLogsLevel(ctx.guild.id) <= 3:
-            consoleLogger.error("[DISCORD] " + error)
+            Logger.error("[DISCORD] " + error)
             
             embed=discord.Embed(title="📙 [ERROR] " + title, description=error, color=settingColors.orange)
-            embed.set_footer(text=serviceTime.classTime.getHMS())
+            embed.set_footer(text=serviceTime.getHMS())
 
             if commandName != None:
                 embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)
@@ -105,10 +105,10 @@ class discordLogger:
             return
         
         if handlerDiscordLogger.getLogsLevel(ctx.guild.id) <= 4:
-            consoleLogger.critical("[DISCORD] " + error)
+            Logger.critical("[DISCORD] " + error)
             
             embed=discord.Embed(title="📕 [CRITICAL] " + title, description=error, color=settingColors.red)
-            embed.set_footer(text=serviceTime.classTime.getHMS())
+            embed.set_footer(text=serviceTime.getHMS())
 
             if commandName != None:
                 embed.add_field(name="Command", value=f"`/{commandName}`", inline=False)

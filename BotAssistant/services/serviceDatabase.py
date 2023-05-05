@@ -3,7 +3,7 @@ import sqlite3
 
 import mysql.connector
 
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 
 import settings.settingDatabase as settingDatabase
 import settings.settingBot as settingBot
@@ -75,8 +75,7 @@ def databaseCreation(tableName: str, columns: list):
 
             makeRequest(requestFormat, requestSettings)
 
-            if settingBot.debug:
-                Logger.debug(f"[HANDLER][{tableName}][INIT]Column {column[0]} initialization success")
+            Logger.table(f"[HANDLER][{tableName}][INIT]Column {column[0]} initialization success")
 
         Logger.database(f"[HANDLER][{tableName}][INIT]Table {tableName} initialization success")
            

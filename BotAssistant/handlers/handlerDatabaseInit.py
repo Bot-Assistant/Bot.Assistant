@@ -1,7 +1,7 @@
 import os
 
 import services.serviceDatabase as serviceDatabase
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 
 import settings.settingBot as settingBot
 

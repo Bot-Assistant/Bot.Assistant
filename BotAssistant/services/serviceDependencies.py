@@ -1,7 +1,7 @@
 import importlib
 import os
 
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 
 import settings.settingBot as settingBot
 
@@ -60,12 +60,12 @@ def installDependencies():
 
     # Log all dependencies
     print("ㅤ")
-    Logger.info("Dependencies: " + package)
+    Logger.install("Dependencies: " + package)
 
     # Write dependencies in requirements.txt
     for package in allPackageDependencies:
 
-        Logger.info(package)
+        Logger.install(package)
 
         requirementsFile.write(package + "\n")
 

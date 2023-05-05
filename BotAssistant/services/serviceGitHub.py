@@ -1,7 +1,7 @@
 import requests
 import time
 
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 
 
 def getLatestRelease(repository, version, author):

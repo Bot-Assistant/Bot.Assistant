@@ -19,7 +19,7 @@ import addons.Configuration.settings.settingLogsLevel as settingLogsLevel
 
 # BOTASSISTANT IMPORTS
 import services.serviceAddonManager as serviceAddonManager
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 from services.serviceDiscordLogger import discordLogger as DiscordLogger
 from settings.settingBot import debug
 
@@ -149,7 +149,7 @@ class Configuration(commands.Cog):
       
 
 def setup(bot):
-    if debug: Logger.debug("Loading cog: " + init.cogName)
+    Logger.debug("Loading cog: " + init.cogName)
     handlerDatabaseInit.databaseInit()
     bot.add_cog(Configuration(bot))
     

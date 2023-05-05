@@ -1,5 +1,5 @@
 import os
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 
 # Write a message in a file (create the file if it does not exist)
 def fileWrite(file, message):

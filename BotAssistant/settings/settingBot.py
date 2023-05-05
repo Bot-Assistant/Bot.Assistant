@@ -1,5 +1,5 @@
 # We recommend you to not change botVersion
-botVersion = "v0.9.2-pre-alpha"
+botVersion = "v0.10.0-alpha"
 
 # If debug is enabled, the console will display more informations
 # It's better to disable it when the bot is in production
@@ -18,5 +18,5 @@ consoleColor = True
 
 # Choose between "MariaDB", "SQLite"
 # MariaDB is recommended
-# ⚠️ Caps sensitive ⚠️
+# /!\ Caps sensitive /!\
 databaseType = "SQLite"

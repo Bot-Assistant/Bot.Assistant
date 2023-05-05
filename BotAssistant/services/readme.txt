@@ -53,14 +53,14 @@ serviceLogger:
     This logger is more complete than the Discord logger.
 
     Functions in this file:
-    consoleLogger.install() - Send a log with "install" tag and color.
-    consoleLogger.system() - Send a log with "system" tag and color.
-    consoleLogger.database() - Send a log with "database" tag and color.
-    consoleLogger.debug() - Send a log with "debug" tag and color.
-    consoleLogger.info() - Send a log with "info" tag and color.
-    consoleLogger.warning() - Send a log with "warning" tag and color.
-    consoleLogger.error() - Send a log with "error" tag and color.
-    consoleLogger.critical() - Send a log with "critical" tag and color.
+    Logger.install() - Send a log with "install" tag and color.
+    Logger.system() - Send a log with "system" tag and color.
+    Logger.database() - Send a log with "database" tag and color.
+    Logger.debug() - Send a log with "debug" tag and color.
+    Logger.info() - Send a log with "info" tag and color.
+    Logger.warning() - Send a log with "warning" tag and color.
+    Logger.error() - Send a log with "error" tag and color.
+    Logger.critical() - Send a log with "critical" tag and color.
 
 serviceTime:
     /!\ This file is very important. The defaults functions of the use this file. /!\
@@ -68,4 +68,4 @@ serviceTime:
 
     Functions in this file:
     getHMS() - Get the time in hours, minutes and seconds.
-    getDMY() - Get the date in day, month and year.
+    getYMD() - Get the date in day, month and year.

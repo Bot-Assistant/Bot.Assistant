@@ -23,3 +23,6 @@ BotAssistant/addons/AutoChannels/
 # Dev Tools
 BotAssistant/addons/-Tests/
 updateAddons.py
+BotAssistant/TestBot.db
+*.db
+.vscode/settings.json

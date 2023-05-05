@@ -3,7 +3,7 @@ import os
 import importlib_metadata
 import time
 
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 import services.serviceGitHub as serviceGitHub
 import settings.settingBot as settingBot
 
@@ -60,7 +60,7 @@ def packageVerification():
                     # Verify if the dependency is installed on python
                     if packageDependency in packageList:
                         if settingBot.debug:
-                            Logger.info(f"Package dependency: {packageDependency} is installed")
+                            Logger.debug(f"Package dependency: {packageDependency} is installed")
 
                     else:
                         if settingBot.debug:
@@ -82,7 +82,7 @@ def packageVerification():
 
                         else:
                             if settingBot.debug:
-                                Logger.info(f"Addon dependency: {addonDependency} is installed")
+                                Logger.debug(f"Addon dependency: {addonDependency} is installed")
 
                     else:
                         if settingBot.debug:

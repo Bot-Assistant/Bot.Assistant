@@ -1,5 +1,5 @@
 import services.serviceDatabase as serviceDatabase 
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 
 from settings.settingBot import debug
 
@@ -15,8 +15,7 @@ def addServerID(serverID):
     try:
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
-        if debug == True: 
-            Logger.debug("[HANDLER][BOTASSISTANT] Adding a server to the DB " + str(serverID))        
+        Logger.debug("[HANDLER][BOTASSISTANT] Adding a server to the DB " + str(serverID))        
         
     except Exception as error:
         Logger.error("[HANDLER][BOTASSISTANT] DB error addServerID -> " + str(error))
@@ -34,8 +33,7 @@ def delServerID(serverID):
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
         
-        if debug == True: 
-            Logger.debug("[HANDLER][BOTASSISTANT] Deleting a server from the DB " + str(serverID))
+        Logger.debug("[HANDLER][BOTASSISTANT] Deleting a server from the DB " + str(serverID))
             
     except Exception as error:
         Logger.error("[HANDLER][BOTASSISTANT] DB error delServerID -> " + str(error))
@@ -50,8 +48,7 @@ def getServers():
     try:
         result = serviceDatabase.getInfoRequest(requestFormat, requestSettings)
         
-        if debug == True: 
-            Logger.debug("[HANDLER][BOTASSISTANT] Get servers from the DB " + str(result))
+        Logger.debug("[HANDLER][BOTASSISTANT] Get servers from the DB " + str(result))
             
         return result
         

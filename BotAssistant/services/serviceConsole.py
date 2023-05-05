@@ -3,7 +3,7 @@ import threading
 import os
 
 import services.serviceCleaner as cleaner
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 
 
 def consoleCommand():

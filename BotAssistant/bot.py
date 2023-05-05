@@ -2,12 +2,16 @@
 import services.serviceFileManager as serviceFileManager
 serviceFileManager.createFolder("logs")
 
+# INIT CONFIG FILE SYSTEM
+import services.serviceFirstInit as serviceFirstInit
+serviceFirstInit.firstStartCheck()
+
 # Install dependencies
 import services.serviceDependencies as serviceDependencies
 serviceDependencies.installDependencies()
 
-import services.serviceVerification as serviceVerification
-serviceVerification.packageVerification()
+import services.serviceAddonVerification as serviceAddonVerification
+serviceAddonVerification.packageVerification()
 
 from settings.settingBot import botVersion
 print("=============================================")
@@ -18,12 +22,8 @@ print("            Bot Assistant Version            ")
 print(f"            {botVersion}         ")
 
 # INIT LOG SYSTEM
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 Logger.system("[BOT]The bot is loading")
-
-# INIT CONFIG FILE SYSTEM
-import services.serviceFirstInit as serviceFirstInit
-serviceFirstInit.firstStartCheck()
 
 # INIT DATABASE
 import handlers.handlerDatabaseInit as handlerDatabaseInit
@@ -63,7 +63,6 @@ async def on_guild_remove(guild):
 # █▀█ █▄▀ █▄▀ █▄█ █░▀█ ▄█
 from services.serviceCogLoad import importCogs
 importCogs()
-
 
 # START THE BOT
 import settings.settingToken as settingToken

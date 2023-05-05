@@ -3,15 +3,19 @@ import os
 from sys import exit
 
 # IMPORT SERVICES
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
+
+import tools.install.installSettings as installSettings
+import tools.install.installDatabase as installDatabase
+import tools.install.installToken as installToken
 
 # Content of the settingDatabase.py file
 databaseFileContent = """# Please fill in the fields below to configure the database
 connection = {
-    "host": "",
-    "database": "",
-    "user": "",
-    "password": ""
+    "host": "defaultHostName",
+    "database": "defaultDatabaseName",
+    "user": "defaultUserName",
+    "password": "defaultPassword"
 }
 
 # Only for sqlite
@@ -26,7 +30,7 @@ token = ""
 
 # CREATION OF CONFIGURATION FILES
 # Initialization function of the settingDatabase.py file
-def databaseFileInit():    
+def databaseFileInit():
     file = open("settings/settingDatabase.py","w")
     file.write(databaseFileContent)
     file.close()
@@ -47,6 +51,10 @@ def tokenFileInit():
 # CHECK CONFIGURATION FILES
 # Configuration file verification function
 def firstStartCheck():
+
+    installSettings.install()
+    installDatabase.install(databaseFileContent)
+    installToken.install(tokenFileContent)
     
     # Checking the existence of the settingToken.py configuration files
     if os.path.exists("settings/settingDatabase.py"): 

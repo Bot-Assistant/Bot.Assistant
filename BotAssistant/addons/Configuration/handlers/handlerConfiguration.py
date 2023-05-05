@@ -1,5 +1,5 @@
 import services.serviceDatabase as serviceDatabase 
-from services.serviceLogger import consoleLogger
+from services.serviceLogger import Logger
 
 from settings.settingBot import debug
 
@@ -13,13 +13,12 @@ def setLogsID(serverID, logsID):
                     """
     requestSettings = (logsID, serverID,)
     try:
-        if debug == True: 
-            consoleLogger.debug("[HANDLER][CONFIGURATION] Adding a log ID to the database. SRV:" + str(serverID) + " LOGS:" + str(logsID))
+        Logger.debug("[HANDLER][CONFIGURATION] Adding a log ID to the database. SRV:" + str(serverID) + " LOGS:" + str(logsID))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
     except Exception as error:
-        consoleLogger.error("[HANDLER][CONFIGURATION] DB error setLogsID -> " + str(error))
+        Logger.error("[HANDLER][CONFIGURATION] DB error setLogsID -> " + str(error))
         
 
 # Permet de définir le niveau de logs
@@ -31,10 +30,9 @@ def setLogsLevel(serverID, logsLevel):
                     """
     requestSettings = (logsLevel, serverID,)
     try:
-        if debug == True: 
-            consoleLogger.debug("[HANDLER][CONFIGURATION] Definition of the log level in the DB. SRV:" + str(serverID) + " LOG LEVEL:" + str(logsLevel))
+        Logger.debug("[HANDLER][CONFIGURATION] Definition of the log level in the DB. SRV:" + str(serverID) + " LOG LEVEL:" + str(logsLevel))
             
         serviceDatabase.makeRequest(requestFormat, requestSettings)
         
     except Exception as error:
-        consoleLogger.error("[HANDLER][CONFIGURATION] DB error setLogsLevel -> " + str(error))
+        Logger.error("[HANDLER][CONFIGURATION] DB error setLogsLevel -> " + str(error))

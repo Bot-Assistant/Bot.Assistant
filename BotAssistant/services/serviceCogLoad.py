@@ -1,7 +1,7 @@
 import importlib
 import os
 
-from services.serviceLogger import consoleLogger as Logger
+from services.serviceLogger import Logger
 from services.serviceBot import classBot
 
 bot = classBot.getBot()
