@@ -1,4 +1,5 @@
 import os
+import time
 
 import services.serviceBotStart as serviceBotStart
 import services.serviceBotUpdater as serviceBotUpdater
@@ -23,12 +24,12 @@ if latestVersion == None:
 
 elif actualVersion == latestVersion:
     print(f"Your version is up to date")
-    os.system("timeout 5")
+    time.sleep(5)
     serviceBotStart.start()
 
 elif actualVersion > latestVersion:
     print(f"Your version is a beta version")
-    os.system("timeout 5")
+    time.sleep(5)
     serviceBotStart.start()
 
 elif actualVersion < latestVersion:

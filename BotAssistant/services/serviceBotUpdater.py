@@ -1,4 +1,5 @@
 import os
+import time
 import requests
 
 from services.serviceLogger import Logger
@@ -111,7 +112,7 @@ def updateBot(actuelVersion, latestVersion):
     Logger.system(f"Bot updated from v{actuelVersion} to v{latestVersion}")
     Logger.system(f"Restart the bot to apply the changes")
 
-    os.system("timeout 10")
+    time.sleep(10)
 
     os._exit(0)
 
