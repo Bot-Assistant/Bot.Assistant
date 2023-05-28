@@ -40,7 +40,7 @@ def getLatestRelease(repository, version, author):
 import requests
 import json
 
-def downloadLatestReleaseAddons(author, repository, addonName):
+def updateLatestReleaseAddons(author, repository, addonName):
     apiURL = f"https://api.github.com/repos/{author}/{repository}/releases/latest"
     
     # Send a GET request to the Github API to get information about the latest release
@@ -71,6 +71,7 @@ def downloadLatestReleaseAddons(author, repository, addonName):
     Logger.update(f"Addon: {repository} - Extracting...")
 
     serviceFileManager.extractZip(f"updates/{repository}-{latestVersion}.zip", f"updates/")
+    
     Logger.update(f"Addon: {repository} - Extract complete")
 
     

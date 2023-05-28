@@ -1,6 +1,7 @@
 import os
 
 import services.serviceBotStart as serviceBotStart
+import services.serviceBotUpdater as serviceBotUpdater
 
 # Get Latest Version from GitHub
 # Get Actual Version from settingBot.py
@@ -31,10 +32,8 @@ elif actualVersion > latestVersion:
     serviceBotStart.start()
 
 elif actualVersion < latestVersion:
-    print(f"Your version is outdated but this v0.10.4-alpha can't update automatically")
-    print("Skipping update...")
-    os.system("timeout 5")
-    serviceBotStart.start()
+    if serviceBotUpdater.updateBot(actualVersion, latestVersion) == False:
+        serviceBotStart.start()
 
 else:
     print(f"An error has occurred")

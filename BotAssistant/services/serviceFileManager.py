@@ -79,7 +79,6 @@ def replaceFolder(source, destination):
 
                     sourcePath = os.path.join(root, file)
                     destinationPath = os.path.join(destination, os.path.relpath(sourcePath, source))
-
                    
                     if os.path.exists(destinationPath):
                         
@@ -100,7 +99,9 @@ def replaceFolder(source, destination):
                         shutil.copy2(sourcePath, destinationPath)
 
                         Logger.debug("[FILEMANAGER] " + destinationPath + " does not exist, copied from source")
-        except:
-            Logger.debug("[FILEMANAGER] Unable to replace "+ source)
+        except Exception as error:
+            Logger.error("[FILEMANAGER] Unable to replace " + source)
+            Logger.critical("[FILEMANAGER] " + str(error))
+
     else:
         Logger.error("[FILEMANAGER] " + source + " does not exist")

@@ -53,6 +53,13 @@ class Logger:
     # White Background: \033[107m HEX: #FFFFFF
 
 
+    # -- Other --
+    # Reset: \033[0m
+    # Bold: \033[1m
+    # Underline: \033[4m
+    # Reversed: \033[7m
+
+
 
 
     colorDict = {

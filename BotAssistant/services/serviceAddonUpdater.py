@@ -4,6 +4,7 @@ import importlib
 import settings.settingBot as settingBot
 
 import services.serviceGitHub as serviceGitHub
+import services.serviceConsoleMessages as serviceConsoleMessages
 from services.serviceLogger import Logger
 
 
@@ -54,11 +55,25 @@ def updateAddon():
                 elif repositoryVersion > importedFile.version:
                     Logger.update(f"Addon: {addonName} - Update available")
 
+                    # Print the logo
+                    serviceConsoleMessages.logo()
+
+                    Logger.update(f"Addon: {addonName} - Version: {importedFile.version} > {repositoryVersion}")
+
+                    # Ask if you want really to update the addon
+                    print(" ")
+                    print("Write 'y' to update the addon, everything else to cancel")
+                    update = input("Answer: ")
+
+                    # If the answer is not "y" then cancel the update
+                    if update != "y":
+                        return
+
                     # Update the addon
                     Logger.update(f"Addon: {addonName} - Updating...")
 
                     # Download the latest release
-                    serviceGitHub.downloadLatestReleaseAddons(importedFile.author, importedFile.repository, addonName)
+                    serviceGitHub.updateLatestReleaseAddons(importedFile.author, importedFile.repository, addonName)
 
                     updatedAddon = True
 
