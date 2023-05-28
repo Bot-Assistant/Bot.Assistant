@@ -88,7 +88,7 @@ def updateBot(actuelVersion, latestVersion):
     # Replace only the files different from the repository
     Logger.update(f"Repository: {repository} - Replacing files...")
 
-    serviceFileManager.replaceFolder(f"updates/{repository}-{latestVersion}/BotAssistant/", f"/")
+    serviceFileManager.replaceFolder(f"updates/{repository}-{latestVersion}/BotAssistant/", f".")
 
     Logger.update(f"Repository: {repository} - Files replaced")
 

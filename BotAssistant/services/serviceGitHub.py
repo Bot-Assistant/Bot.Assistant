@@ -21,7 +21,7 @@ def getLatestRelease(repository, version, author):
 
         if ipPattern.search(error):
             error = "GITHUB : API rate limit exceeded for your IP address."
-            Logger.critical(error)
+            Logger.warning(error)
             os.system("timeout 5")
 
         else:
