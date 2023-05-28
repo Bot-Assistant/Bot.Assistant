@@ -1,69 +1,41 @@
-# INIT FILE SYSTEM
-import services.serviceFileManager as serviceFileManager
-serviceFileManager.createFolder("logs")
+import os
 
-# INIT CONFIG FILE SYSTEM
-import services.serviceFirstInit as serviceFirstInit
-serviceFirstInit.firstStartCheck()
+import services.serviceBotStart as serviceBotStart
 
-# Install dependencies
-import services.serviceDependencies as serviceDependencies
-serviceDependencies.installDependencies()
+# Get Latest Version from GitHub
+# Get Actual Version from settingBot.py
+try:
+    import services.serviceGitHub as serviceGitHub
+    import settings.settingBot as settingBot
+    latestVersion = serviceGitHub.getLatestRelease("Bot.Assistant", settingBot.botVersion, "Ted-18")
+    actualVersion = settingBot.botVersion.replace("v", "")
+except Exception as error:
+    print(f"Error: {error}")
 
-import services.serviceAddonVerification as serviceAddonVerification
-serviceAddonVerification.packageVerification()
+# Print text logo
+import services.serviceConsoleMessages as serviceConsoleMessages
+serviceConsoleMessages.logo()
 
-from settings.settingBot import botVersion
-print("=============================================")
-print("█▄▄ █▀█ ▀█▀ ░ ▄▀█ █▀ █▀ █ █▀ ▀█▀ ▄▀█ █▄░█ ▀█▀")
-print("█▄█ █▄█ ░█░ ▄ █▀█ ▄█ ▄█ █ ▄█ ░█░ █▀█ █░▀█ ░█░")
-print("=============================================")
-print("            Bot Assistant Version            ")
-print(f"            {botVersion}         ")
+# Check if the version is up to date
+if latestVersion == None:
+    serviceBotStart.start()
 
-# INIT LOG SYSTEM
-from services.serviceLogger import Logger
-Logger.system("[BOT]The bot is loading")
+elif actualVersion == latestVersion:
+    print(f"Your version is up to date")
+    os.system("timeout 5")
+    serviceBotStart.start()
 
-# INIT DATABASE
-import handlers.handlerDatabaseInit as handlerDatabaseInit
-handlerDatabaseInit.databaseInit()
+elif actualVersion > latestVersion:
+    print(f"Your version is a beta version")
+    os.system("timeout 5")
+    serviceBotStart.start()
 
-# INIT BOT 
-import services.serviceBot as serviceBot
-serviceBot.classBot.initialize()
-bot = serviceBot.classBot.getBot()
-command = serviceBot.classBot.getCommands()
+elif actualVersion < latestVersion:
+    print(f"Your version is outdated but this v0.10.4-alpha can't update automatically")
+    print("Skipping update...")
+    os.system("timeout 5")
+    serviceBotStart.start()
 
-
-
-# █▀█ █▄░█   █▀█ █▀▀ ▄▀█ █▀▄ █▄█
-# █▄█ █░▀█   █▀▄ ██▄ █▀█ █▄▀ ░█░
-import services.serviceConsole as serviceConsole
-import functions.events.eventOnReady as eventOnReady
-@bot.event
-async def on_ready():
-    Logger.system("The bot is now online")
-    eventOnReady.onReady()
-    serviceConsole.consoleCommand()
-
-
-
-from handlers import handlersServer
-@bot.event
-async def on_guild_join(guild):
-    handlersServer.addServerID(guild.id)
-
-@bot.event
-async def on_guild_remove(guild):
-    handlersServer.delServerID(guild.id)
-
-
-# ▄▀█ █▀▄ █▀▄ █▀█ █▄░█ █▀
-# █▀█ █▄▀ █▄▀ █▄█ █░▀█ ▄█
-from services.serviceCogLoad import importCogs
-importCogs()
-
-# START THE BOT
-import settings.settingToken as settingToken
-bot.run(settingToken.token)
+else:
+    print(f"An error has occurred")
+    os._exit(0)

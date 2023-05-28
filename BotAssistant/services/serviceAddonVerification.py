@@ -53,9 +53,6 @@ def packageVerification():
                 if settingBot.debug:
                     Logger.install(f"Addon verification: {addonName}")
 
-                if importedFile.enableGithub == True:
-                    serviceGitHub.getLatestRelease(importedFile.repository, importedFile.version, importedFile.author)
-
                 for packageDependency in importedFile.packageDependencies:
                     # Verify if the dependency is installed on python
                     if packageDependency in packageList:

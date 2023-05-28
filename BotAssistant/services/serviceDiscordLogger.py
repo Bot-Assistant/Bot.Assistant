@@ -40,7 +40,7 @@ class discordLogger:
             return
         
         if handlerDiscordLogger.getLogsLevel(ctx.guild.id) <= 1:
-            Loggerinfo("[DISCORD] " + error)
+            Logger.info("[DISCORD] " + error)
             
             embed=discord.Embed(title="📘 [INFO] " + title, description=error, color=settingColors.cyan)
             embed.set_footer(text=serviceTime.getHMS())

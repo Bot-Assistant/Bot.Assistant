@@ -5,9 +5,9 @@ from sys import exit
 # IMPORT SERVICES
 from services.serviceLogger import Logger
 
-import tools.install.installSettings as installSettings
-import tools.install.installDatabase as installDatabase
-import tools.install.installToken as installToken
+import tools.toolConfigurator.installSettings as installSettings
+import tools.toolConfigurator.installDatabase as installDatabase
+import tools.toolConfigurator.installToken as installToken
 
 # Content of the settingDatabase.py file
 databaseFileContent = """# Please fill in the fields below to configure the database

@@ -19,10 +19,22 @@ BotAssistant/addons/Moderator/
 BotAssistant/addons/Traductor/
 BotAssistant/addons/AutoChannels/
 # BotAssistant/addons/TicketManager/
+# BotAssistant/addons/StatisticTool/
+
 
 # Dev Tools
 BotAssistant/addons/-Tests/
+BotAssistant/updates/
 updateAddons.py
-BotAssistant/TestBot.db
 *.db
-.vscode/settings.json
+.vscode/
+
+# Wiki
+Wiki/
+
+# Addons Made To Measures
+BotAssistant/addons/CerberusBR/
+BotAssistant/addons/CerberusRecrutement/
+BotAssistant/addons/CerberusRoles/
+BotAssistant/addons/CerberusAbsences/
+

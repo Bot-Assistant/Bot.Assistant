@@ -44,4 +44,5 @@ def importCogs():
                     Logger.info("[COG]" + cogPath + " loaded")
         
     except Exception as error:
-        Logger.error("Loading cogs error --> " + str(error))
+        Logger.critical("Loading cogs error --> " + str(error))
+        os._exit(0)

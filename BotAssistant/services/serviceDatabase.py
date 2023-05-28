@@ -100,7 +100,7 @@ def makeRequest(requestFormat, requestSettings):
 
         elif settingBot.databaseType == "SQLite":
             # Connect to the database
-            database = sqlite3.connect(settingDatabase.sqliteFile + ".db")
+            database = sqlite3.connect(f"settings/{settingDatabase.sqliteFile}.db")
 
             requestFormat = requestFormat.replace("%s", "?")
 
@@ -133,7 +133,7 @@ def getInfoRequest(requestFormat, requestSettings):
         
         elif settingBot.databaseType == "SQLite":
             # Connect to the database
-            database = sqlite3.connect(settingDatabase.sqliteFile + ".db")
+            database = sqlite3.connect(f"settings/{settingDatabase.sqliteFile}.db")
 
             requestFormat = requestFormat.replace("%s", "?")
 

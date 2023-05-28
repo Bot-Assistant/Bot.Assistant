@@ -2,7 +2,7 @@ import os
 
 import services.serviceTokenVerificator as tokenVerificator
 
-import tools.install.messages.messageLogo as messages
+import services.serviceConsoleMessages as serviceConsoleMessages
 
 
 def install(defaultToken: str):
@@ -10,15 +10,16 @@ def install(defaultToken: str):
     if os.path.exists("settings/settingToken.py"):
         return
 
-    messages.send()
+    serviceConsoleMessages.logo()
 
-    token = input("Enter the bot token: ")
+    print("Please enter the token of the bot")
+    token = input("Answer: ")
 
-    messages.send()
+    serviceConsoleMessages.logo()
     valid = tokenVerificator.verification(token)
 
     if not valid:
-        messages.send()
+        serviceConsoleMessages.logo()
         print("Something went wrong!")
         print("")
         print("Verify this things:")

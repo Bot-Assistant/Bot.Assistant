@@ -4,18 +4,19 @@ import mysql.connector
 
 import settings.settingBot as settingBot
 
-import tools.install.messages.messageLogo as messageLogo
+import services.serviceConsoleMessages as serviceConsoleMessages
 
 def install(defaultDatabase: str):
 
     if os.path.exists("settings/settingDatabase.py"):
         return
 
-    messageLogo.send()
+    serviceConsoleMessages.send()
     
     if settingBot.databaseType == "SQLite":
 
-        sqliteName = input("Enter the name of the database: ")
+        print("Please enter the name of the database")
+        sqliteName = input("Answer: ")
         
         # Verify if the database name is valid
        
@@ -35,11 +36,19 @@ def install(defaultDatabase: str):
 
 
     elif settingBot.databaseType == "MariaDB":
+        
+        print("Please enter the information of the database")
+        print("Enter the host name: ")
+        databaseHost = input("Answer: ")
 
-        databaseHost = input("Enter the database host: ")
-        databaseName = input("Enter the database name: ")
-        databaseUser = input("Enter the database user: ")
-        databasePassword = input("Enter the database password: ")
+        print("Enter the database name: ")
+        databaseName = input("Answer: ")
+
+        print("Enter the user name: ")
+        databaseUser = input("Answer: ")
+
+        print("Enter the password: ")
+        databasePassword = input("Answer: ")
 
         # Edit the setting
         defaultDatabase = defaultDatabase.replace("defaultHostName", databaseHost)

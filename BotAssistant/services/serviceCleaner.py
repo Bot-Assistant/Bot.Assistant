@@ -5,13 +5,22 @@ from services.serviceLogger import Logger
 
 def clean(path):
     Logger.info("[CLEANER] Cleaning started")
-    for dirpath, dirnames, filenames in os.walk(path):
-        for dirname in dirnames:
-            if dirname == "__pycache__":
-                Logger.debug("[CLEANER] Deleting " + os.path.join(dirpath, dirname))
-                shutil.rmtree(os.path.join(dirpath, dirname))
-        for filename in filenames:
+
+    for dirPath, dirNames, fileNames in os.walk(path):
+
+        for dirName in dirNames:
+
+            if dirName == "__pycache__":
+                Logger.debug("[CLEANER] Deleting " + os.path.join(dirPath, dirName))
+                shutil.rmtree(os.path.join(dirPath, dirName))
+
+            if dirName == "updates":
+                Logger.debug("[CLEANER] Deleting " + os.path.join(dirPath, dirName))
+                shutil.rmtree(os.path.join(dirPath, dirName))
+
+        for filename in fileNames:
             if filename == ".DS_Store":
-                Logger.debug("[CLEANER] Deleting " + os.path.join(dirpath, filename))
-                os.remove(os.path.join(dirpath, filename))
+                Logger.debug("[CLEANER] Deleting " + os.path.join(dirPath, filename))
+                os.remove(os.path.join(dirPath, filename))
+
     Logger.info("[CLEANER] Cleaning done")

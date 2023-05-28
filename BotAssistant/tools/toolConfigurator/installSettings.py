@@ -1,18 +1,20 @@
 import os 
-import tools.install.messages.messageLogo as messageLogo
-import tools.install.settings.settingBotEditor as settingBotEditor
-import tools.install.settings.settingQuestions as settingQuestions
+import services.serviceConsoleMessages as serviceConsoleMessages
+import tools.toolConfigurator.settings.settingBotEditor as settingBotEditor
+import tools.toolConfigurator.settings.settingQuestions as settingQuestions
 
 def install():
 
     if os.path.exists("settings/settingDatabase.py"):
         
-        messageLogo.send()
-        if input("Write 'y' to configure settings, space to skip:") != "y":
+        serviceConsoleMessages.logo()
+        print("Write 'y' to configure settings, space to skip:")
+        if input("Answer: ") != "y":
             return
 
     settingBotEditor.settingBotBool("consoleColor", settingQuestions.colorSetting())
     settingBotEditor.settingBotBool("debug", settingQuestions.debugSetting())
+    settingBotEditor.settingBotBool("addonUpdate", settingQuestions.addonUpdateSetting())
     settingBotEditor.settingBotBool("addonVerification", settingQuestions.addonsSetting())
     settingBotEditor.settingBotBool("dependenciesVerification", settingQuestions.dependenciesSetting())
     

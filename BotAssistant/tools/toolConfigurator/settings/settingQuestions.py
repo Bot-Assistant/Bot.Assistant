@@ -1,7 +1,7 @@
-import tools.install.messages.messageLogo as messageLogo
+import services.serviceConsoleMessages as serviceConsoleMessages
 
 def colorSetting():
-    messageLogo.send()
+    serviceConsoleMessages.logo()
     print("Do you see the color of the text below?")
     print(" ")
     print("  \033[91m" + "RED" + "\033[0m  ")
@@ -18,28 +18,35 @@ def colorSetting():
     return answer
 
 def debugSetting():
-    messageLogo.send()
+    serviceConsoleMessages.logo()
     print("Do you want to enable debug mode? (y/n)")
     answer = input("Answer: ")
 
     return answer
 
+def addonUpdateSetting():
+    serviceConsoleMessages.logo()
+    print("Do you want to enable auto addon update? (y/n)")
+    answer = input("Answer: ")
+
+    return answer
+
 def addonsSetting():
-    messageLogo.send()
+    serviceConsoleMessages.logo()
     print("Do you want to verify the addons? (y/n)")
     answer = input("Answer: ")
 
     return answer
 
 def dependenciesSetting():
-    messageLogo.send()
+    serviceConsoleMessages.logo()
     print("Do you want to verify the dependencies? (y/n)")
     answer = input("Answer: ")
 
     return answer
 
 def databaseTypeSetting():
-    messageLogo.send()
+    serviceConsoleMessages.logo()
     print("Choose the database type:")
     print(" ")
     print("1. MariaDB")
@@ -49,3 +56,4 @@ def databaseTypeSetting():
     answer = input("Answer: ")
 
     return answer
+

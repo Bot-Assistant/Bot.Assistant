@@ -2,10 +2,12 @@ import os
 
 import settings.settingBot as settingBot
 
-def send():
+def logo():
 
-    #Clear console
-    os.system("cls")
+    if os.name == 'nt':
+        os.system("cls")
+    elif os.name == 'posix':
+        os.system("clear")
 
     #Print logo
     print(f"========================================================")
