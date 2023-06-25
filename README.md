@@ -1,5 +1,5 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg?style=for-the-badge)](https://www.python.org/)
-[![wakatime](https://wakatime.com/badge/user/f59667a1-6452-42a0-8127-4e5133353d0b/project/4447d8de-24b5-46bf-9d97-047ba49109b6.svg?style=for-the-badge)](https://wakatime.com/badge/user/f59667a1-6452-42a0-8127-4e5133353d0b/project/4447d8de-24b5-46bf-9d97-047ba49109b6)
+[![wakatime](https://wakatime.com/badge/user/f59667a1-6452-42a0-8127-4e5133353d0b/project/2e69accc-0082-42cb-afb3-4ead3de7870f.svg?style=for-the-badge)](https://wakatime.com/badge/user/f59667a1-6452-42a0-8127-4e5133353d0b/project/2e69accc-0082-42cb-afb3-4ead3de7870f)
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge)](http://perso.crans.org/besson/LICENSE.html)
 
 [![Latest release](https://badgen.net/github/release/Ted-18/Bot.Assistant?style=for-the-badge)](https://github.com/Ted-18/Bot.Assistant/releases)
