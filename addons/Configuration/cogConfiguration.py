@@ -21,7 +21,6 @@ import addons.Configuration.settings.settingLogsLevel as settingLogsLevel
 import services.serviceAddonManager as serviceAddonManager
 from services.serviceLogger import Logger
 from services.serviceDiscordLogger import discordLogger as DiscordLogger
-from settings.settingBot import debug
 
 # INIT BOT VARIABLES
 import services.serviceBot as serviceBot

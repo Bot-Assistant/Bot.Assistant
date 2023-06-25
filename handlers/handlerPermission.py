@@ -1,7 +1,5 @@
-import services.serviceDatabase as serviceDatabase 
+import services.serviceDatabase as serviceDatabase
 from services.serviceLogger import Logger
-
-from settings.settingBot import debug
 
 
 # Verify if the role has the permission bool

@@ -1,7 +1,6 @@
-import services.serviceDatabase as serviceDatabase 
+import services.serviceDatabase as serviceDatabase
 from services.serviceLogger import Logger
 
-from settings.settingBot import debug
 
 # Add a server to the database when the bot join a server
 def addServerID(serverID):

@@ -1,9 +1,7 @@
-import services.serviceDatabase as serviceDatabase 
+import services.serviceDatabase as serviceDatabase
 from services.serviceLogger import Logger
 
-from settings.settingBot import debug
 
-    
 # Permet de récupérer le salon de logs
 def getLogsID(serverID):
     requestFormat = """

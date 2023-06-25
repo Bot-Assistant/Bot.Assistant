@@ -4,7 +4,6 @@ import importlib_metadata
 import time
 
 from services.serviceLogger import Logger
-import services.serviceGitHub as serviceGitHub
 import settings.settingBot as settingBot
 
 def packageVerification():

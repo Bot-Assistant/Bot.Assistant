@@ -1,25 +1,29 @@
-import os
+import sys
 import time
 
 import services.serviceBotStart as serviceBotStart
 import services.serviceBotUpdater as serviceBotUpdater
+import services.serviceConsoleMessages as serviceConsoleMessages
 
 # Get Latest Version from GitHub
 # Get Actual Version from settingBot.py
+
+latestVersion = None
+actualVersion = None
+
 try:
     import services.serviceGitHub as serviceGitHub
     import settings.settingBot as settingBot
+
     latestVersion = serviceGitHub.getLatestRelease("Bot.Assistant", settingBot.botVersion, "Ted-18")
     actualVersion = settingBot.botVersion.replace("v", "")
 except Exception as error:
     print(f"Error: {error}")
 
-# Print text logo
-import services.serviceConsoleMessages as serviceConsoleMessages
 serviceConsoleMessages.logo()
 
-# Check if the version is up to date
-if latestVersion == None:
+# Check if the version is up-to-date
+if latestVersion is None:
     serviceBotStart.start()
 
 elif actualVersion == latestVersion:
@@ -33,9 +37,9 @@ elif actualVersion > latestVersion:
     serviceBotStart.start()
 
 elif actualVersion < latestVersion:
-    if serviceBotUpdater.updateBot(actualVersion, latestVersion) == False:
+    if not serviceBotUpdater.updateBot(actualVersion, latestVersion):
         serviceBotStart.start()
 
 else:
     print(f"An error has occurred")
-    os._exit(0)
+    sys.exit(0)

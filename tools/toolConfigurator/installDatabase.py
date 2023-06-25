@@ -11,7 +11,7 @@ def install(defaultDatabase: str):
     if os.path.exists("settings/settingDatabase.py"):
         return
 
-    serviceConsoleMessages.send()
+    serviceConsoleMessages.logo()
     
     if settingBot.databaseType == "SQLite":
 

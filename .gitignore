@@ -1,40 +1,17 @@
 # Useless files
 *.pyc
 *.log
+*.db
+updates/
 
  
 # Settings !IMPORTANT!
-BotAssistant/settings/settingDatabase.py
-BotAssistant/settings/settingToken.py
+settings/settingDatabase.py
+settings/settingToken.py
 
 
-# All addons
-BotAssistant/addons/JoinRole/
-BotAssistant/addons/ReactionRole/
-BotAssistant/addons/LevelSystem/
-BotAssistant/addons/Soundplay/
-BotAssistant/addons/Announcements/
-BotAssistant/addons/Votes/
-BotAssistant/addons/Moderator/
-BotAssistant/addons/Traductor/
-BotAssistant/addons/AutoChannels/
-# BotAssistant/addons/TicketManager/
-# BotAssistant/addons/StatisticTool/
+# IDE Files
+.vscode/*
+.idea/*
 
-
-# Dev Tools
-BotAssistant/addons/-Tests/
-BotAssistant/updates/
-updateAddons.py
-*.db
-.vscode/
-
-# Wiki
-Wiki/
-
-# Addons Made To Measures
-BotAssistant/addons/CerberusBR/
-BotAssistant/addons/CerberusRecrutement/
-BotAssistant/addons/CerberusRoles/
-BotAssistant/addons/CerberusAbsences/
 

@@ -1,6 +1,5 @@
 import os
 import shutil
-from settings.settingBot import debug
 from services.serviceLogger import Logger
 
 def clean(path):
