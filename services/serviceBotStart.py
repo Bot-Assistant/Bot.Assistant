@@ -12,9 +12,9 @@ def start():
     import services.serviceAddonUpdater as serviceAddonUpdater
     serviceAddonUpdater.updateAddon()
 
-    # Install dependencies
+    # Install dependencies from addons
     import services.serviceDependencies as serviceDependencies
-    serviceDependencies.installDependencies()
+    serviceDependencies.installAddonsDependencies()
 
     import services.serviceAddonVerification as serviceAddonVerification
     serviceAddonVerification.packageVerification()

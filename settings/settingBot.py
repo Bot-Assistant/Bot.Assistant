@@ -1,5 +1,5 @@
 # We recommend you to not change botVersion
-botVersion = "v0.11.3-alpha"
+botVersion = "v0.11.4-alpha"
 
 # If debug is enabled, the console will display more informations
 # It's better to disable it when the bot is in production
@@ -13,7 +13,7 @@ addonUpdate = False
 addonVerification = False
 
 # If you you disable this option, the bot will not check if the dependencies are installed
-dependenciesVerification = False
+dependenciesVerification = True
 
 # If color is enabled, the console will be colored
 # Some terminals don't support color, so it's better to disable it
