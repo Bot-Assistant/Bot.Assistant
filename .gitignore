@@ -6,8 +6,8 @@ updates/
 
  
 # Settings !IMPORTANT!
-settings/settingDatabase.py
-settings/settingToken.py
+V1/settings/settingDatabase.py
+V1/settings/settingToken.py
 
 
 # IDE Files

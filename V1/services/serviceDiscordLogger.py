@@ -1,6 +1,6 @@
 from services.serviceLogger import Logger
 
-import handlers.handlerDiscordLogger as handlerDiscordLogger
+import V1.handlers.handlerDiscordLogger as handlerDiscordLogger
 import services.serviceTime as serviceTime
 import settings.settingColors as settingColors
 
