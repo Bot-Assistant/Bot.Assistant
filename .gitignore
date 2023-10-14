@@ -15,3 +15,5 @@ V1/settings/settingToken.py
 .idea/*
 
 
+settings/setting_token.py
+settings/setting_database.py

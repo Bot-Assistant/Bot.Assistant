@@ -1,7 +1,18 @@
 import os
 import sys
 
-from V2.settings import setting_dependencies
+from services import service_dependencies, service_console_messages, service_bot, service_bot_init
+from services.service_dependencies import install_dependency
+from settings import setting_dependencies
+
+
+def initialization():
+    service_console_messages.logo()
+    install_bot_dependencies()
+    service_bot.BotAssistant.initialize()
+
+    service_console_messages.logo()
+    service_bot_init.first_start_check()
 
 
 def install_bot_dependencies():
@@ -9,7 +20,7 @@ def install_bot_dependencies():
     # PIP
     print("Upgrading pip...", end="", flush=True)
     os.system(f"{sys.executable} -m pip install pip --upgrade --quiet")
-    print("[OK]\n")
+    print("\033[92m[OK]\033[0m\n")
 
     # DEPENDENCIES
     for dependency in setting_dependencies.dependencies:
@@ -26,20 +37,4 @@ def install_bot_dependencies():
         install_dependency(dependency_pip_name, dependency_module_name)
 
 
-def install_dependency(dependency_pip_name, dependency_module_name):
-
-    # Send installation message
-    print(f"Installing/upgrading {dependency_pip_name}...", end="", flush=True)
-
-    # Install or upgrade the dependency in silent mode
-    os.system(f"{sys.executable} -m pip install {dependency_pip_name} --upgrade --quiet")
-
-    # Check if the dependency has been installed
-    try:
-        __import__(dependency_module_name)
-        print("[OK]")
-    except ImportError:
-        print(f"Error details: {sys.exc_info()[1]}")
-        print(f"Error: {dependency_pip_name} has not been installed")
-        sys.exit(0)
-
+initialization()

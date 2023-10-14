@@ -1,6 +1,6 @@
 import os
 
-from V2.settings import setting_bot
+from settings import setting_bot
 
 
 def logo():
@@ -14,7 +14,7 @@ def logo():
     print(f"      █▄▄ █▀█ ▀█▀ ░ ▄▀█ █▀ █▀ █ █▀ ▀█▀ ▄▀█ █▄░█ ▀█▀     ")
     print(f"      █▄█ █▄█ ░█░ ▄ █▀█ ▄█ ▄█ █ ▄█ ░█░ █▀█ █░▀█ ░█░     ")
     print(f"========================================================")
-    print(f"                   Bot Assistant Version                ")
-    print(f"                   {setting_bot.bot_version}              ")
+    print(f"                      Bot Assistant                     ")
+    print(f"                      {setting_bot.bot_version}         ")
     print(f"========================================================")
     print(f"                                                        ")

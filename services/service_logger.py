@@ -1,80 +1,32 @@
-from V2.services import service_time
-from V2.settings import setting_bot
+from services import service_time
+from settings import setting_bot
+
+from settings.setting_colors import *
 
 
 class Logger:
-    # TEXT COLORS
-    # -- Dark --
-    # Dark Red: \033[31m HEX: #800000
-    # Dark Green: \033[32m HEX: #008000
-    # Dark Yellow: \033[33m HEX: #808000
-    # Dark Blue: \033[34m HEX: #000080
-    # Dark Magenta: \033[35m HEX: #800080
-    # Dark Cyan: \033[36m HEX: #008080
-
-    # -- Light --
-    # Light Red: \033[91m HEX: #FF0000
-    # Light Green: \033[92m HEX: #00FF00
-    # Light Yellow: \033[93m HEX: #FFFF00
-    # Light Blue: \033[94m HEX: #0000FF
-    # Light Magenta: \033[95m HEX: #FF00FF
-    # Light Cyan: \033[96m HEX: #00FFFF
-
-    # BACKGROUND COLORS
-    # -- Dark --
-    # Dark Red Background: \033[41m HEX: #800000
-    # Dark Green Background: \033[42m HEX: #008000
-    # Dark Yellow Background: \033[43m HEX: #808000
-    # Dark Blue Background: \033[44m HEX: #000080
-    # Dark Magenta Background: \033[45m HEX: #800080
-    # Dark Cyan Background: \033[46m HEX: #008080
-
-    # -- Light --
-    # Light Red Background: \033[101m HEX: #FF0000
-    # Light Green Background: \033[102m HEX: #00FF00
-    # Light Yellow Background: \033[103m HEX: #FFFF00
-    # Light Blue Background: \033[104m HEX: #0000FF
-    # Light Magenta Background: \033[105m HEX: #FF00FF
-    # Light Cyan Background: \033[106m HEX: #00FFFF
-
-    # -- Black --
-    # Black: \033[30m HEX: #000000
-    # Dark Gray: \033[90m HEX: #808080
-    # Light Gray: \033[37m HEX: #C0C0C0
-    # White: \033[97m HEX: #FFFFFF
-
-    # Black Background: \033[40m HEX: #000000
-    # Dark Gray Background: \033[100m HEX: #808080
-    # Light Gray Background: \033[47m HEX: #C0C0C0
-    # White Background: \033[107m HEX: #FFFFFF
-
-    # -- Other --
-    # Reset: \033[0m
-    # Bold: \033[1m
-    # Underline: \033[4m
-    # Reversed: \033[7m
 
     color_dict = {
         # Initialization logs
-        "system": "\033[45m\033[97m",  # Background #800080 Text #FFFFFF
-        "install": "\033[46m\033[97m",  # Background #008080 Text #FFFFFF
-        "update": "\033[42m\033[97m",  # Background #008000 Text #FFFFFF
+        "system": bg_dark_magenta + txt_black,
+        "installer": bg_light_cyan + txt_black,
+        "update": bg_dark_green + txt_black,
 
         # Database logs
-        "table": "\033[33m",  # Background - Text #808000
-        "colomn": "\033[34m",  # Background - Text #000080
+        "table": txt_dark_yellow,
+        "colomn": txt_dark_blue,
 
         # Information logs
-        "debug": "\033[96m",  # Background - Text #00FFFF
-        "info": "\033[92m",  # Background - Text #00FF00
-        "warning": "\033[93m",  # Background - Text #FFFF00
-        "error": "\033[91m",  # Background - Text #FF0000
-        "critical": "\033[41m\033[97m"  # Background #800000 Text #FFFFFF
+        "debug": txt_light_cyan,
+        "info": txt_light_green,
+        "warning": txt_light_yellow,
+        "error": txt_light_red,
+        "critical": bg_dark_red + txt_white
     }
 
     prefix_dict = {
         "system": "[SYSTEM]",
-        "install": "[INSTALL]",
+        "installer": "[INSTALL]",
         "update": "[UPDATE]",
 
         "table": "[TABLE]",
@@ -129,7 +81,7 @@ class Logger:
 
     @staticmethod
     def install(message, write_in_file=True):
-        Logger.write("install", message, write_in_file)
+        Logger.write("installer", message, write_in_file)
 
     @staticmethod
     def update(message, write_in_file=True):
