@@ -1,0 +1,9 @@
+{
+    "connection": {
+        "host": "defaultHostName",
+        "database": "defaultDatabaseName",
+        "user": "defaultUserName",
+        "password": "defaultPassword"
+    },
+    "sqliteFile": "defaultFile"
+}

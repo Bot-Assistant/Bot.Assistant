@@ -1,19 +1,17 @@
 import os
 import sys
 
-from settings import setting_dependencies
-
 from settings.setting_colors import *
 
 
 def install_dependency(dependency_pip_name, dependency_module_name):
-    # Send installation message
+    # Print an installation message
     print(f"Installing/upgrading {dependency_pip_name}...", end="", flush=True)
 
-    # Install or upgrade the dependency in silent mode
+    # Install or upgrade the dependency in quiet mode
     os.system(f"{sys.executable} -m pip install {dependency_pip_name} --upgrade --quiet")
 
-    # Check if the dependency has been installed
+    # Check if the dependency has been successfully installed
     try:
         __import__(dependency_module_name)
         print(txt_light_green + "[OK]" + color_reset)

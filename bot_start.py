@@ -1,9 +1,11 @@
 import os
 import sys
 
-from services import service_dependencies, service_console_messages, service_bot, service_bot_init
-from services.service_dependencies import install_dependency
+from services import service_dependencies, service_console_messages, service_bot
+from init import init_bot
 from settings import setting_dependencies
+
+from settings.setting_colors import *
 
 
 def initialization():
@@ -12,7 +14,7 @@ def initialization():
     service_bot.BotAssistant.initialize()
 
     service_console_messages.logo()
-    service_bot_init.first_start_check()
+    init_bot.first_start_check()
 
 
 def install_bot_dependencies():
@@ -20,7 +22,7 @@ def install_bot_dependencies():
     # PIP
     print("Upgrading pip...", end="", flush=True)
     os.system(f"{sys.executable} -m pip install pip --upgrade --quiet")
-    print("\033[92m[OK]\033[0m\n")
+    print(txt_dark_green + "[OK]" + color_reset + "\n")
 
     # DEPENDENCIES
     for dependency in setting_dependencies.dependencies:
@@ -34,7 +36,7 @@ def install_bot_dependencies():
             dependency_module_name = dependency_pip_name
 
         # Install the dependency
-        install_dependency(dependency_pip_name, dependency_module_name)
+        service_dependencies.install_dependency(dependency_pip_name, dependency_module_name)
 
 
 initialization()
