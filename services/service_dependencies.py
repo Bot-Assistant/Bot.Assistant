@@ -16,5 +16,5 @@ def install_dependency(dependency_pip_name, dependency_module_name):
         __import__(dependency_module_name)
         print(txt_light_green + "[OK]" + color_reset)
     except ImportError:
-        print(txt_light_red + "[ERROR]" + color_reset + sys.exc_info()[1])
+        print(txt_light_red + "[ERROR]" + color_reset + str(sys.exc_info()[1]))
         sys.exit(0)

@@ -1,11 +1,10 @@
 import os
 import sys
 
+from settings import setting_dependencies
+from settings.setting_colors import *
 from services import service_dependencies, service_console_messages, service_bot
 from init import init_bot
-from settings import setting_dependencies
-
-from settings.setting_colors import *
 
 
 def initialization():
@@ -18,7 +17,6 @@ def initialization():
 
 
 def install_bot_dependencies():
-
     # PIP
     print("Upgrading pip...", end="", flush=True)
     os.system(f"{sys.executable} -m pip install pip --upgrade --quiet")

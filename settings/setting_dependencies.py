@@ -6,5 +6,8 @@ dependencies = [
     ["mysql-connector-python", "mysql.connector"],
     ["importlib_metadata", ""],
     ["requests", ""],
-    ["prettytable", ""]
+    ["prettytable", ""],
+    ["pytz", ""],
+    ["colorama", ""],
+    ["pytz", ""]
 ]

@@ -14,7 +14,7 @@ class Logger:
 
         # Database logs
         "table": txt_dark_yellow,
-        "colomn": txt_dark_blue,
+        "column": txt_dark_blue,
 
         # Information logs
         "debug": txt_light_cyan,
@@ -30,7 +30,7 @@ class Logger:
         "update": "[UPDATE]",
 
         "table": "[TABLE]",
-        "colomn": "[COLOMN]",
+        "column": "[COLUMN]",
 
         "debug": "[DEBUG]",
         "info": "[INFO]",
@@ -94,7 +94,7 @@ class Logger:
 
     @staticmethod
     def column(message, write_in_file=True):
-        Logger.write("colomn", message, write_in_file)
+        Logger.write("column", message, write_in_file)
 
     # Information logs
     @staticmethod
